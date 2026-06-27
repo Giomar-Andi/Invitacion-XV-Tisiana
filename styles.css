@@ -287,12 +287,21 @@ body {
 }
 
 /* Lantern sparkles around hero name */
-.lantern-sparkle {
-    display:inline-block;
-    animation:sparkleFloat 3s ease-in-out infinite;
-    font-size:1.6rem;
-    margin:0 .5rem;
-    filter:drop-shadow(0 0 8px #d4af37);
+.lantern-img {
+    width: 56px;
+    height: auto;
+    margin: 0 .6rem;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 12px rgba(212,175,55,.7));
+    display: inline-block;
+}
+.hero-crown {
+    width: 100px;
+    margin-bottom: .4rem;
+    filter: drop-shadow(0 8px 30px rgba(212,175,55,.5));
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 @keyframes sparkleFloat {
     0%,100%{transform:translateY(0) scale(1);opacity:1}
