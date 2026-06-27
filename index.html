@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#C8B8E8">
-    <title>Mis XV Años - Antonella Luana</title>
-    <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#C8B8E8" />
+    <title>XV Antonella Luana · Elegancia</title>
+    <link rel="manifest" href="manifest.json" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- Loading -->
+    <!-- LOADER -->
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
-            <p>Cargando experiencia mágica...</p>
+            <p>Preparando la magia...</p>
         </div>
     </div>
 
-    <!-- Música -->
+    <!-- MÚSICA -->
     <button class="music-control" id="musicControl">
         <span class="music-icon">🎵</span>
     </button>
     <audio id="bgMusic" loop>
-        <source src="music/cancion.mp3" type="audio/mpeg">
+        <source src="music/cancion.mp3" type="audio/mpeg" />
     </audio>
 
-    <!-- Navegación -->
+    <!-- NAVEGACIÓN -->
     <nav class="navbar" id="navbar">
-        <div class="nav-brand">XV Antonella</div>
+        <div class="nav-brand">✦ Antonella</div>
         <button class="nav-toggle" id="navToggle">☰</button>
         <ul class="nav-menu" id="navMenu">
             <li><a href="#inicio">Inicio</a></li>
@@ -39,33 +39,36 @@
         </ul>
     </nav>
 
-    <!-- SECCIÓN 1: HERO -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="inicio">
         <div class="hero-bg">
-            <div class="floating-lantern" style="--delay: 0s"></div>
-            <div class="floating-lantern" style="--delay: 2s"></div>
-            <div class="floating-lantern" style="--delay: 4s"></div>
+            <div class="floating-lantern" style="--delay:0s"></div>
+            <div class="floating-lantern" style="--delay:2s"></div>
+            <div class="floating-lantern" style="--delay:4s"></div>
+            <div class="sparkle sparkle-1"></div>
+            <div class="sparkle sparkle-2"></div>
+            <div class="sparkle sparkle-3"></div>
         </div>
         <div class="hero-content">
-            <img src="images/corona.png" alt="Corona" class="hero-crown">
+            <img src="images/corona.png" alt="Corona" class="hero-crown float-animation" />
             <h1 class="hero-title">
                 <span class="hero-subtitle">Mis</span>
                 <span class="hero-main">XV Años</span>
             </h1>
             <p class="hero-name">Antonella Luana</p>
-            <img src="images/rapunzel.png" alt="Rapunzel" class="hero-illustration">
+            <img src="images/rapunzel.png" alt="Rapunzel" class="hero-illustration float-animation-slow" />
             <div class="hero-decorations">
-                <img src="images/flores.png" alt="Flores" class="deco-flowers-left">
-                <img src="images/flores.png" alt="Flores" class="deco-flowers-right">
+                <img src="images/flores.png" alt="Flores" class="deco-flowers-left float-animation" />
+                <img src="images/flores.png" alt="Flores" class="deco-flowers-right float-animation" />
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Desliza hacia abajo</span>
+            <span>Desliza</span>
             <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- SECCIÓN 2: MENSAJE -->
+    <!-- ===== MENSAJE ===== -->
     <section class="section message" id="mensaje">
         <div class="container">
             <div class="section-header">
@@ -73,7 +76,7 @@
                 <div class="section-divider"></div>
             </div>
             <div class="message-content">
-                <div class="message-text-wrapper">
+                <div class="message-text-wrapper glass-card float-animation">
                     <button class="heart-button" id="heartButton">
                         <span class="heart-icon">💜</span>
                         <span class="heart-text">Toca para escuchar</span>
@@ -85,13 +88,13 @@
                     </div>
                 </div>
                 <div class="message-illustration">
-                    <img src="images/pascal.png" alt="Pascal" class="pascal-illustration">
+                    <img src="images/pascal.png" alt="Pascal" class="pascal-illustration float-animation-slow" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 3: PADRES -->
+    <!-- ===== PADRES ===== -->
     <section class="section parents">
         <div class="container">
             <div class="section-header">
@@ -105,15 +108,15 @@
                     <p class="parent-name">Juan Casas</p>
                 </div>
                 <p class="parents-text">Tienen el honor de invitarlos a festejar los XV años de su hija</p>
-                <div class="name-showcase">
+                <div class="name-showcase glass-card float-animation">
                     <h1 class="quinceanera-name">Antonella Luana</h1>
-                    <img src="images/sol.png" alt="Sol" class="sun-decoration">
+                    <img src="images/sol.png" alt="Sol" class="sun-decoration float-animation" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 4: CUENTA REGRESIVA -->
+    <!-- ===== CONTADOR ===== -->
     <section class="section countdown-section">
         <div class="container">
             <div class="section-header">
@@ -121,19 +124,19 @@
                 <div class="section-divider"></div>
             </div>
             <div class="countdown-grid">
-                <div class="countdown-card">
+                <div class="countdown-card float-animation" style="--delay:0.1s">
                     <span class="countdown-value" id="days">00</span>
                     <span class="countdown-label">Días</span>
                 </div>
-                <div class="countdown-card">
+                <div class="countdown-card float-animation" style="--delay:0.3s">
                     <span class="countdown-value" id="hours">00</span>
                     <span class="countdown-label">Horas</span>
                 </div>
-                <div class="countdown-card">
+                <div class="countdown-card float-animation" style="--delay:0.5s">
                     <span class="countdown-value" id="minutes">00</span>
                     <span class="countdown-label">Minutos</span>
                 </div>
-                <div class="countdown-card">
+                <div class="countdown-card float-animation" style="--delay:0.7s">
                     <span class="countdown-value" id="seconds">00</span>
                     <span class="countdown-label">Segundos</span>
                 </div>
@@ -141,7 +144,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 5: FECHA Y LUGAR -->
+    <!-- ===== FECHA Y LUGAR ===== -->
     <section class="section date-location" id="fecha">
         <div class="container">
             <div class="section-header">
@@ -149,13 +152,13 @@
                 <div class="section-divider"></div>
             </div>
             <div class="date-location-grid">
-                <div class="date-card">
+                <div class="date-card glass-card float-animation">
                     <div class="date-month">JULIO</div>
                     <div class="date-day">17</div>
                     <div class="date-year">2026</div>
                     <div class="date-weekday">SÁBADO</div>
                 </div>
-                <div class="location-card">
+                <div class="location-card glass-card float-animation">
                     <h3 class="location-title">Recepción</h3>
                     <div class="location-details">
                         <div class="location-item">
@@ -167,7 +170,7 @@
                             <span>Calle Diseñarte, Lima</span>
                         </div>
                     </div>
-                    <a href="https://maps.google.com/?q=Calle+Diseñarte+Lima+Peru" target="_blank" class="btn-primary">
+                    <a href="https://maps.google.com/?q=Calle+Diseñarte+Lima+Peru" target="_blank" class="btn-primary btn-large">
                         <span>🗺️</span> Cómo Llegar
                     </a>
                 </div>
@@ -175,7 +178,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 6: VESTIMENTA -->
+    <!-- ===== VESTIMENTA ===== -->
     <section class="section dresscode" id="vestimenta">
         <div class="container">
             <div class="section-header">
@@ -184,24 +187,24 @@
             </div>
             <div class="dresscode-content">
                 <div class="dresscode-cards">
-                    <div class="dresscode-item">
+                    <div class="dresscode-item glass-card float-animation">
                         <div class="dresscode-icon">👔</div>
                         <h3>Formal</h3>
                     </div>
-                    <div class="dresscode-item">
+                    <div class="dresscode-item glass-card float-animation" style="--delay:0.2s">
                         <div class="dresscode-icon">👗</div>
                         <h3>Elegante</h3>
                     </div>
                 </div>
-                <div class="dresscode-note">
+                <div class="dresscode-note glass-card float-animation">
                     <p class="note-main">Se reserva el color morado</p>
-                    <p class="note-highlight">¡Dejémosle esos tonos para la Quinceañera!</p>
+                    <p class="note-highlight">¡Dejémosle esos tonos a la Quinceañera!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 7: REGALOS -->
+    <!-- ===== REGALOS ===== -->
     <section class="section gifts">
         <div class="container">
             <div class="section-header">
@@ -209,13 +212,13 @@
                 <div class="section-divider"></div>
             </div>
             <div class="gifts-content">
-                <div class="gift-icon">🎁</div>
-                <p class="gift-message">Tu presencia es el mejor regalo.<br>Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.</p>
+                <div class="gift-icon float-animation">🎁</div>
+                <p class="gift-message">Tu presencia es el mejor regalo.<br />Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.</p>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 8: CONFIRMAR -->
+    <!-- ===== RSVP ===== -->
     <section class="section rsvp" id="rsvp">
         <div class="container">
             <div class="section-header">
@@ -226,26 +229,26 @@
                 <p class="rsvp-text">Te agradecemos que confirmes tu asistencia al siguiente WhatsApp</p>
                 <a href="https://wa.me/51999999999?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Antonella%20Luana" 
                    target="_blank" 
-                   class="btn-primary btn-large">
+                   class="btn-primary btn-large float-animation">
                     <span>📱</span> Confirmar por WhatsApp
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 9: CIERRE -->
+    <!-- ===== CIERRE ===== -->
     <section class="section closing">
         <div class="container">
             <h2 class="closing-title">¡Te Esperamos!</h2>
-            <img src="images/rapunzel.png" alt="Rapunzel" class="closing-illustration">
+            <img src="images/rapunzel.png" alt="Rapunzel" class="closing-illustration float-animation-slow" />
             <div class="closing-decorations">
-                <img src="images/flores.png" alt="Flores" class="closing-flowers-left">
-                <img src="images/flores.png" alt="Flores" class="closing-flowers-right">
+                <img src="images/flores.png" alt="Flores" class="closing-flowers-left float-animation" />
+                <img src="images/flores.png" alt="Flores" class="closing-flowers-right float-animation" />
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <p>Hecho con 💜 para Antonella Luana</p>
         <p class="footer-year">2026</p>
