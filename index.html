@@ -3,293 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mis XV Años - Antonella Luana">
     <meta name="theme-color" content="#C8B8E8">
-    <title>✨ Mis XV Años - Antonella Luana ✨</title>
+    <title>Mis XV Años - Antonella Luana</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="images/corona.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-crown-container">
-                <img src="images/corona.png" alt="Corona" class="loading-crown">
-            </div>
-            <p class="loading-text">Preparando un momento mágico...</p>
-            <div class="loading-dots">
-                <span></span><span></span><span></span>
-            </div>
+    <!-- Loading -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Cargando experiencia mágica...</p>
         </div>
     </div>
 
-    <!-- Audio -->
+    <!-- Música -->
+    <button class="music-control" id="musicControl">
+        <span class="music-icon">🎵</span>
+    </button>
     <audio id="bgMusic" loop>
         <source src="music/cancion.mp3" type="audio/mpeg">
     </audio>
-    
-    <button class="music-btn" id="musicBtn" aria-label="Música">
-        <span class="music-icon">🎵</span>
-    </button>
 
-    <!-- SECCIÓN 1: SOBRE MÁGICO -->
-    <section class="section section-envelope" id="section1">
-        <div class="floating-bg">
-            <div class="floating-lantern" style="top:10%;left:10%;animation-delay:0s"></div>
-            <div class="floating-lantern" style="top:20%;right:15%;animation-delay:2s"></div>
-            <div class="floating-lantern" style="bottom:20%;left:20%;animation-delay:4s"></div>
-            <div class="floating-butterfly" style="top:15%;right:10%;animation-delay:1s"></div>
-            <div class="floating-butterfly" style="bottom:25%;right:20%;animation-delay:3s"></div>
-        </div>
-        
-        <div class="envelope-wrapper">
-            <div class="envelope-magic" id="envelope">
-                <div class="envelope-flap"></div>
-                <div class="envelope-body">
-                    <div class="envelope-content">
-                        <img src="images/corona.png" alt="Corona" class="envelope-crown">
-                    </div>
-                    <div class="wax-seal" id="waxSeal">
-                        <span class="seal-text">Tocar</span>
-                    </div>
-                </div>
-            </div>
-            <p class="envelope-instruction">Toca el sobre para descubrir la invitación</p>
-        </div>
-    </section>
+    <!-- Navegación -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">XV Antonella</div>
+        <button class="nav-toggle" id="navToggle">☰</button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#mensaje">Mensaje</a></li>
+            <li><a href="#fecha">Fecha</a></li>
+            <li><a href="#vestimenta">Vestimenta</a></li>
+            <li><a href="#rsvp">Confirmar</a></li>
+        </ul>
+    </nav>
 
-    <!-- SECCIÓN 2: HERO -->
-    <section class="section section-hero hidden" id="section2">
-        <div class="hero-bg-gradient"></div>
-        <div class="floating-bg">
-            <div class="floating-lantern" style="top:15%;left:5%;animation-delay:0s"></div>
-            <div class="floating-lantern" style="top:30%;right:10%;animation-delay:2.5s"></div>
-            <div class="floating-lantern" style="bottom:25%;left:15%;animation-delay:5s"></div>
-            <div class="floating-sparkle" style="top:20%;left:20%;animation-delay:1s"></div>
-            <div class="floating-sparkle" style="top:60%;right:15%;animation-delay:3s"></div>
+    <!-- SECCIÓN 1: HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg">
+            <div class="floating-lantern" style="--delay: 0s"></div>
+            <div class="floating-lantern" style="--delay: 2s"></div>
+            <div class="floating-lantern" style="--delay: 4s"></div>
         </div>
-        
         <div class="hero-content">
-            <div class="hero-crown-container">
-                <img src="images/corona.png" alt="Corona" class="hero-crown float-element">
-            </div>
+            <img src="images/corona.png" alt="Corona" class="hero-crown">
             <h1 class="hero-title">
-                <span class="hero-title-small">Mis</span>
-                <span class="hero-title-big">XV Años</span>
+                <span class="hero-subtitle">Mis</span>
+                <span class="hero-main">XV Años</span>
             </h1>
-            <div class="hero-illustration">
-                <img src="images/rapunzel.png" alt="Rapunzel" class="hero-rapunzel float-element-slow">
-            </div>
+            <p class="hero-name">Antonella Luana</p>
+            <img src="images/rapunzel.png" alt="Rapunzel" class="hero-illustration">
             <div class="hero-decorations">
-                <img src="images/flores.png" alt="Flores" class="hero-flowers-left float-element">
-                <img src="images/flores.png" alt="Flores" class="hero-flowers-right float-element">
+                <img src="images/flores.png" alt="Flores" class="deco-flowers-left">
+                <img src="images/flores.png" alt="Flores" class="deco-flowers-right">
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Desliza hacia abajo</span>
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- SECCIÓN 3: MENSAJE -->
-    <section class="section section-message hidden" id="section3">
-        <div class="message-container">
-            <div class="scroll-paper">
-                <div class="scroll-header">
-                    <img src="images/corona.png" alt="Corona" class="scroll-crown">
-                </div>
-                <div class="scroll-content">
-                    <p class="scroll-instruction">Toca el corazón para escuchar la canción ✨</p>
-                    <button class="heart-btn" id="heartBtn">
+    <!-- SECCIÓN 2: MENSAJE -->
+    <section class="section message" id="mensaje">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mi Mensaje</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="message-content">
+                <div class="message-text-wrapper">
+                    <button class="heart-button" id="heartButton">
                         <span class="heart-icon">💜</span>
+                        <span class="heart-text">Toca para escuchar</span>
                     </button>
-                    <p class="message-text">
-                        Con la bendición de Dios y el amor que mi familia me ha dado, 
-                        me siento feliz de llegar a este momento de mi vida.
-                    </p>
-                    <p class="message-text">
-                        El día que dejaré atrás mi infancia y comenzaré un nuevo viaje 
-                        lleno de sueños y esperanzas.
-                    </p>
-                    <p class="message-text">
-                        Porque son parte de mi vida, es mi deseo que compartan conmigo 
-                        la alegría de mis quince años.
-                    </p>
+                    <div class="message-text">
+                        <p>Con la bendición de Dios y el amor que mi familia me ha dado, me siento feliz de llegar a este momento de mi vida.</p>
+                        <p>El día que dejaré atrás mi infancia y comenzaré un nuevo viaje lleno de sueños y esperanzas.</p>
+                        <p>Porque son parte de mi vida, es mi deseo que compartan conmigo la alegría de mis quince años.</p>
+                    </div>
                 </div>
-                <div class="scroll-footer">
-                    <img src="images/pascal.png" alt="Pascal" class="scroll-pascal">
+                <div class="message-illustration">
+                    <img src="images/pascal.png" alt="Pascal" class="pascal-illustration">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 4: PADRES -->
-    <section class="section section-parents hidden" id="section4">
-        <div class="parents-bg-pattern"></div>
-        <div class="floating-bg">
-            <div class="floating-butterfly" style="top:10%;left:10%;animation-delay:0s"></div>
-            <div class="floating-butterfly" style="bottom:15%;right:15%;animation-delay:2.5s"></div>
-        </div>
-        
-        <div class="parents-container">
-            <h2 class="section-title">Mis Padres</h2>
-            <div class="parents-names">
-                <p class="parent-name">Elena Meza</p>
-                <p class="parent-and">y</p>
-                <p class="parent-name">Juan Casas</p>
+    <!-- SECCIÓN 3: PADRES -->
+    <section class="section parents">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mis Padres</h2>
+                <div class="section-divider"></div>
             </div>
-            <p class="parents-invitation">
-                Tienen el honor de invitarlos a festejar los XV años de su hija
-            </p>
-            <div class="name-frame-gold">
-                <h1 class="quinceanera-name">Antonella Luana</h1>
-                <img src="images/sol.png" alt="Sol" class="name-sun-icon">
+            <div class="parents-content">
+                <div class="parents-names">
+                    <p class="parent-name">Elena Meza</p>
+                    <p class="parent-and">y</p>
+                    <p class="parent-name">Juan Casas</p>
+                </div>
+                <p class="parents-text">Tienen el honor de invitarlos a festejar los XV años de su hija</p>
+                <div class="name-showcase">
+                    <h1 class="quinceanera-name">Antonella Luana</h1>
+                    <img src="images/sol.png" alt="Sol" class="sun-decoration">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 5: CUENTA REGRESIVA -->
-    <section class="section section-countdown hidden" id="section5">
-        <div class="countdown-bg"></div>
-        <div class="floating-bg">
-            <div class="floating-lantern" style="top:10%;left:5%;animation-delay:0s"></div>
-            <div class="floating-lantern" style="top:40%;right:10%;animation-delay:3s"></div>
-        </div>
-        
-        <div class="countdown-container">
-            <h2 class="section-title">Tan Solo Faltan</h2>
+    <!-- SECCIÓN 4: CUENTA REGRESIVA -->
+    <section class="section countdown-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Faltan</h2>
+                <div class="section-divider"></div>
+            </div>
             <div class="countdown-grid">
-                <div class="countdown-box">
-                    <span class="countdown-number" id="days">00</span>
+                <div class="countdown-card">
+                    <span class="countdown-value" id="days">00</span>
                     <span class="countdown-label">Días</span>
                 </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="hours">00</span>
+                <div class="countdown-card">
+                    <span class="countdown-value" id="hours">00</span>
                     <span class="countdown-label">Horas</span>
                 </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="minutes">00</span>
+                <div class="countdown-card">
+                    <span class="countdown-value" id="minutes">00</span>
                     <span class="countdown-label">Minutos</span>
                 </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="seconds">00</span>
+                <div class="countdown-card">
+                    <span class="countdown-value" id="seconds">00</span>
                     <span class="countdown-label">Segundos</span>
                 </div>
             </div>
-            <div class="countdown-decoration">
-                <img src="images/pascal.png" alt="Pascal" class="countdown-pascal">
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: FECHA Y LUGAR -->
+    <section class="section date-location" id="fecha">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Fecha y Lugar</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="date-location-grid">
+                <div class="date-card">
+                    <div class="date-month">JULIO</div>
+                    <div class="date-day">17</div>
+                    <div class="date-year">2026</div>
+                    <div class="date-weekday">SÁBADO</div>
+                </div>
+                <div class="location-card">
+                    <h3 class="location-title">Recepción</h3>
+                    <div class="location-details">
+                        <div class="location-item">
+                            <span class="location-icon">🕐</span>
+                            <span>8:00 pm</span>
+                        </div>
+                        <div class="location-item">
+                            <span class="location-icon">📍</span>
+                            <span>Calle Diseñarte, Lima</span>
+                        </div>
+                    </div>
+                    <a href="https://maps.google.com/?q=Calle+Diseñarte+Lima+Peru" target="_blank" class="btn-primary">
+                        <span>🗺️</span> Cómo Llegar
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 6: FECHA Y LUGAR -->
-    <section class="section section-date hidden" id="section6">
-        <div class="date-container">
-            <div class="date-card">
-                <div class="date-header">
-                    <span class="date-month">JULIO</span>
-                </div>
-                <div class="date-day-container">
-                    <span class="date-day">17</span>
-                </div>
-                <div class="date-year">
-                    <span>2026</span>
-                </div>
-                <div class="date-weekday">SÁBADO</div>
+    <!-- SECCIÓN 6: VESTIMENTA -->
+    <section class="section dresscode" id="vestimenta">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Código de Vestimenta</h2>
+                <div class="section-divider"></div>
             </div>
-            
-            <div class="event-info">
-                <h3 class="event-title">Recepción</h3>
-                <div class="event-details">
-                    <div class="event-item">
-                        <span class="event-icon">🕐</span>
-                        <span class="event-text">Horario: 8:00 pm</span>
+            <div class="dresscode-content">
+                <div class="dresscode-cards">
+                    <div class="dresscode-item">
+                        <div class="dresscode-icon">👔</div>
+                        <h3>Formal</h3>
                     </div>
-                    <div class="event-item">
-                        <span class="event-icon">📍</span>
-                        <span class="event-text">Calle Diseñarte, Lima</span>
+                    <div class="dresscode-item">
+                        <div class="dresscode-icon">👗</div>
+                        <h3>Elegante</h3>
                     </div>
                 </div>
-                <a href="https://maps.google.com/?q=Calle+Diseñarte+Lima+Peru" target="_blank" class="btn-gold btn-location">
-                    <span class="btn-icon">🗺️</span>
-                    Cómo Llegar
+                <div class="dresscode-note">
+                    <p class="note-main">Se reserva el color morado</p>
+                    <p class="note-highlight">¡Dejémosle esos tonos para la Quinceañera!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 7: REGALOS -->
+    <section class="section gifts">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mesa de Regalos</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="gifts-content">
+                <div class="gift-icon">🎁</div>
+                <p class="gift-message">Tu presencia es el mejor regalo.<br>Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 8: CONFIRMAR -->
+    <section class="section rsvp" id="rsvp">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Confirmar Asistencia</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="rsvp-content">
+                <p class="rsvp-text">Te agradecemos que confirmes tu asistencia al siguiente WhatsApp</p>
+                <a href="https://wa.me/51999999999?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Antonella%20Luana" 
+                   target="_blank" 
+                   class="btn-primary btn-large">
+                    <span>📱</span> Confirmar por WhatsApp
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 7: CÓDIGO DE VESTIMENTA -->
-    <section class="section section-dresscode hidden" id="section7">
-        <div class="dresscode-container">
-            <h2 class="section-title">Código de Vestimenta</h2>
-            <div class="dresscode-cards">
-                <div class="dresscode-card">
-                    <div class="dresscode-icon">👔</div>
-                    <p class="dresscode-type">Formal</p>
-                </div>
-                <div class="dresscode-card">
-                    <div class="dresscode-icon">👗</div>
-                    <p class="dresscode-type">Elegante</p>
-                </div>
-            </div>
-            <div class="dresscode-note">
-                <p class="note-text">Se reserva el color morado</p>
-                <p class="note-text-highlight">¡Dejémosle esos tonos para la Quinceañera!</p>
-            </div>
-            <img src="images/pascal.png" alt="Pascal" class="dresscode-pascal">
-        </div>
-    </section>
-
-    <!-- SECCIÓN 8: MESA DE REGALOS -->
-    <section class="section section-gifts hidden" id="section8">
-        <div class="gifts-container">
-            <h2 class="section-title">Mesa de Regalos</h2>
-            <div class="gift-icon-large">
-                <span class="gift-emoji">🎁</span>
-            </div>
-            <p class="gift-message">
-                Tu presencia es el mejor regalo.<br>
-                Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.
-            </p>
-        </div>
-    </section>
-
-    <!-- SECCIÓN 9: CONFIRMACIÓN -->
-    <section class="section section-rsvp hidden" id="section9">
-        <div class="rsvp-container">
-            <h2 class="section-title">Confirmar tu Asistencia</h2>
-            <p class="rsvp-text">
-                Te agradecemos que confirmes tu asistencia al siguiente WhatsApp
-            </p>
-            <a href="https://wa.me/51999999999?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Antonella%20Luana" 
-               target="_blank" 
-               class="btn-gold btn-confirm">
-                <span class="btn-icon">📱</span>
-                Confirmar
-            </a>
-        </div>
-    </section>
-
-    <!-- SECCIÓN 10: CIERRE -->
-    <section class="section section-closing hidden" id="section10">
-        <div class="closing-bg"></div>
-        <div class="floating-bg">
-            <div class="floating-lantern" style="top:15%;left:10%;animation-delay:0s"></div>
-            <div class="floating-lantern" style="top:30%;right:15%;animation-delay:2s"></div>
-            <div class="floating-lantern" style="bottom:20%;left:20%;animation-delay:4s"></div>
-            <div class="floating-butterfly" style="top:20%;right:10%;animation-delay:1s"></div>
-            <div class="floating-butterfly" style="bottom:25%;left:15%;animation-delay:3s"></div>
-        </div>
-        
-        <div class="closing-content">
+    <!-- SECCIÓN 9: CIERRE -->
+    <section class="section closing">
+        <div class="container">
             <h2 class="closing-title">¡Te Esperamos!</h2>
-            <div class="closing-illustration">
-                <img src="images/rapunzel.png" alt="Rapunzel" class="closing-rapunzel">
-            </div>
-            <div class="closing-flowers">
-                <img src="images/flores.png" alt="Flores" class="closing-flower-left">
-                <img src="images/flores.png" alt="Flores" class="closing-flower-right">
+            <img src="images/rapunzel.png" alt="Rapunzel" class="closing-illustration">
+            <div class="closing-decorations">
+                <img src="images/flores.png" alt="Flores" class="closing-flowers-left">
+                <img src="images/flores.png" alt="Flores" class="closing-flowers-right">
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Hecho con 💜 para Antonella Luana</p>
+        <p class="footer-year">2026</p>
+    </footer>
 
     <script src="app.js"></script>
 </body>
