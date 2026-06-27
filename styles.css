@@ -450,56 +450,76 @@ body {
 }
 
 /* ============================================
-   VESTIMENTA
+   VESTIMENTA (rediseñada completamente)
    ============================================ */
 .dresscode-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1.5rem;
-    max-width: 550px;
-    margin: 0 auto 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
 }
 .dresscode-item {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(6px);
-    border-radius: 24px;
-    padding: 1.8rem 0.5rem;
+    border-radius: 28px;
+    padding: 2rem 1rem;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+.dresscode-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 .dresscode-item:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+.dresscode-item:hover::before {
+    opacity: 1;
 }
 .dresscode-icon {
-    font-size: 3.5rem;
+    font-size: 4rem;
     display: block;
     margin-bottom: 0.3rem;
 }
 .dresscode-item h4 {
     font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #f0e8f5;
     letter-spacing: 2px;
 }
+.dresscode-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.2rem;
+    letter-spacing: 1px;
+}
 .dresscode-note {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(4px);
     border-radius: 60px;
-    padding: 1.2rem 1.5rem;
+    padding: 1.5rem 2rem;
     text-align: center;
-    max-width: 500px;
+    max-width: 550px;
     margin: 0 auto;
     border: 1px solid rgba(212, 175, 55, 0.08);
 }
 .dresscode-note p {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: #d4c4d4;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
 }
 .dresscode-note strong {
     font-family: 'Great Vibes', cursive;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: #d4af37;
     display: block;
 }
