@@ -1,658 +1,706 @@
-/* ============================================
-   RESET Y BASE
-   ============================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+    --gold:       #d4af37;
+    --gold-light: #f5e6a3;
+    --gold-glow:  rgba(212,175,55,.35);
+    --purple-deep:#0b0812;
+    --purple-mid: #1a0f2a;
+    --purple-card:#160d26;
+    --lavender:   #b89fd4;
+    --lavender-pale: rgba(180,140,210,.13);
+    --cream:      #f0e8f5;
+    --white10:    rgba(255,255,255,.10);
+    --white05:    rgba(255,255,255,.05);
 }
+
+html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Lora', serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    background: #0b0812;
-    color: #f0e8f5;
+    background: var(--purple-deep);
+    color: var(--cream);
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* ============================================
-   FONDO ESTRELLADO CON LUNA
-   ============================================ */
-.bg-container {
+/* ============================================================
+   FONDO ESTRELLADO
+   ============================================================ */
+.bg-scene {
     position: fixed;
     inset: 0;
     z-index: 0;
-    background: radial-gradient(ellipse at 50% 50%, #1a0f2a 0%, #0b0812 70%);
+    background: radial-gradient(ellipse at 50% 0%, #2a1040 0%, #0b0812 65%);
+    pointer-events: none;
     overflow: hidden;
 }
-
 .moon {
     position: absolute;
-    top: 8%;
-    right: 8%;
-    width: 130px;
-    height: 130px;
+    top: 6%;
+    right: 7%;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #fffbe6, #f5e6a3);
-    box-shadow: 0 0 80px rgba(255, 235, 150, 0.5), 0 0 160px rgba(255, 235, 150, 0.2);
+    box-shadow: 0 0 70px rgba(255,235,150,.6), 0 0 160px rgba(255,235,150,.25);
     animation: moonGlow 5s ease-in-out infinite alternate;
 }
 @keyframes moonGlow {
-    0% { box-shadow: 0 0 60px rgba(255, 235, 150, 0.4), 0 0 120px rgba(255, 235, 150, 0.15); }
-    100% { box-shadow: 0 0 100px rgba(255, 235, 150, 0.8), 0 0 200px rgba(255, 235, 150, 0.4); }
+    from { box-shadow: 0 0 60px rgba(255,235,150,.4),0 0 120px rgba(255,235,150,.15); }
+    to   { box-shadow: 0 0 110px rgba(255,235,150,.85),0 0 220px rgba(255,235,150,.4); }
 }
-
-.glow-spot {
+.glow-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    pointer-events: none;
-    opacity: 0.3;
-}
-.glow-1 {
-    width: 500px;
-    height: 500px;
-    background: #6b4e71;
-    top: -150px;
-    left: -150px;
-}
-.glow-2 {
-    width: 600px;
-    height: 600px;
-    background: #9b7cb6;
-    bottom: -200px;
-    right: -200px;
-}
-
-#stars {
-    position: absolute;
-    inset: 0;
+    filter: blur(110px);
+    opacity: .22;
     pointer-events: none;
 }
+.gb1 { width:520px;height:520px;background:#6b3d9b;top:-180px;left:-180px; }
+.gb2 { width:600px;height:600px;background:#9b5cb6;bottom:-220px;right:-220px; }
+.gb3 { width:350px;height:350px;background:#c4a060;top:40%;left:50%;transform:translate(-50%,-50%);opacity:.10; }
+#stars { position:absolute;inset:0; }
 .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
     animation: twinkle ease-in-out infinite alternate;
 }
 @keyframes twinkle {
-    0% { opacity: 0.2; transform: scale(0.7); }
-    100% { opacity: 1; transform: scale(1.3); }
+    from { opacity:.15;transform:scale(.6); }
+    to   { opacity:1;  transform:scale(1.4); }
 }
 
-/* ============================================
-   CONTENEDOR PRINCIPAL
-   ============================================ */
+/* ============================================================
+   BOTÓN MÚSICA
+   ============================================================ */
+.music-btn {
+    position:fixed;
+    top:1.2rem; right:1.2rem;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.12);
+    color: var(--gold-light);
+    font-size:1.5rem;
+    cursor:pointer;
+    z-index:999;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s ease;
+    box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.music-btn:hover { transform:scale(1.12);background:rgba(255,255,255,.13); }
+.music-btn.playing {
+    background:linear-gradient(135deg,var(--gold),#ffd700);
+    color:#1a0f2a;
+    border-color:var(--gold);
+    animation:pulseMus 2s ease-in-out infinite;
+}
+@keyframes pulseMus { 0%,100%{transform:scale(1)}50%{transform:scale(1.08)} }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
 .invitation-wrapper {
-    max-width: 1100px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    padding: 1rem 0;
-    position: relative;
-    z-index: 1;
+    position:relative;
+    z-index:1;
+    max-width:900px;
+    margin:0 auto;
+    padding:2.5rem 1.2rem 4rem;
+    display:flex;
+    flex-direction:column;
+    gap:0; /* gestionado sección a sección */
 }
 
-/* ============================================
-   TARJETAS GLASS (estilo video)
-   ============================================ */
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 40px;
-    padding: 2.8rem 2.5rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: transform 0.4s ease, box-shadow 0.5s ease;
-    position: relative;
-    overflow: visible;
-}
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+/* ============================================================
+   SECCIONES — base
+   ============================================================ */
+.section {
+    position:relative;
+    border-radius:36px;
+    overflow:visible;
+    margin-bottom:3.5rem;
 }
 
-/* ============================================
-   DECORACIONES FLORALES (bordes)
-   ============================================ */
-.deco-top,
-.deco-bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: rgba(212, 175, 55, 0.25);
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.2rem;
-    letter-spacing: 8px;
-    pointer-events: none;
-}
-.deco-top {
-    top: -12px;
-}
-.deco-bottom {
-    bottom: -12px;
-    transform: scaleY(-1);
+/* Inner card glass */
+.card-inner {
+    background: linear-gradient(155deg, rgba(40,18,65,.92) 0%, rgba(22,10,40,.96) 100%);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(212,175,55,.18);
+    border-radius:36px;
+    padding:3.5rem 3rem;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.7),
+        0 0 0 1px rgba(255,255,255,.04) inset,
+        0 1px 0 rgba(212,175,55,.2) inset;
+    position:relative;
+    overflow:hidden;
 }
 
-/* ============================================
-   ANIMACIONES DE FLOTACIÓN
-   ============================================ */
-.float-icon {
-    animation: float 6s ease-in-out infinite;
+/* Shimmer top border */
+.card-inner::before {
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--gold), rgba(212,175,55,.5), var(--gold), transparent);
+    opacity:.6;
 }
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
+
+/* ============================================================
+   ORNAMENTOS DORADOS
+   ============================================================ */
+.ornament {
+    text-align:center;
+    color:rgba(212,175,55,.45);
+    font-size:.85rem;
+    letter-spacing:10px;
+    margin-bottom:1.6rem;
+    user-select:none;
+}
+.ornament-bottom { margin-top:1.6rem;margin-bottom:0; }
+
+.divider-gold {
+    width:160px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:1.4rem auto;
+    opacity:.5;
+}
+
+/* ============================================================
+   IMÁGENES DECORATIVAS FLOTANTES
+   ============================================================ */
+.deco-img {
+    position:absolute;
+    pointer-events:none;
+    z-index:10;
+    filter:drop-shadow(0 8px 24px rgba(0,0,0,.45));
+}
+.deco-rama-seca {
+    width:260px;
+    top:-60px;
+    right:-50px;
+    transform:rotate(20deg);
+    opacity:.75;
+}
+.deco-rama-hojas {
+    width:280px;
+    top:-55px;
+    left:-55px;
+    transform:scaleX(-1) rotate(-15deg);
+    opacity:.8;
+}
+.deco-flores-left {
+    width:200px;
+    bottom:-40px;
+    left:-30px;
+    transform:rotate(10deg);
+    opacity:.85;
+}
+.deco-flores-right {
+    width:180px;
+    bottom:-35px;
+    right:-25px;
+    transform:scaleX(-1) rotate(8deg);
+    opacity:.80;
+}
+.deco-trenza {
+    width:160px;
+    top:-45px;
+    right:-20px;
+    opacity:.7;
+}
+
+/* ============================================================
+   ANIMACIONES FLOAT
+   ============================================================ */
+.float-gentle {
+    animation: floatG 7s ease-in-out infinite;
+}
+@keyframes floatG {
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-16px)}
 }
 .float-slow {
-    animation: floatSlow 8s ease-in-out infinite;
+    animation: floatS 9s ease-in-out infinite;
 }
-@keyframes floatSlow {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-22px) rotate(2deg); }
-}
-
-/* ============================================
-   BOTÓN DE MÚSICA
-   ============================================ */
-.music-btn {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #f5e6a3;
-    font-size: 1.6rem;
-    cursor: pointer;
-    z-index: 999;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.music-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.12);
-}
-.music-btn.playing {
-    background: linear-gradient(135deg, #d4af37, #ffd700);
-    color: #1a0f2a;
-    border-color: #d4af37;
-    animation: pulse-music 2s ease-in-out infinite;
-}
-@keyframes pulse-music {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+@keyframes floatS {
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-20px) rotate(2deg)}
 }
 
-/* ============================================
+/* ============================================================
    HERO
-   ============================================ */
-.hero-card {
-    text-align: center;
-    padding: 3rem 2rem 2.5rem;
-    background: rgba(255, 255, 255, 0.04);
+   ============================================================ */
+.hero-section {
+    text-align:center;
 }
-.hero-crown {
-    width: 110px;
-    margin-bottom: 0.3rem;
-    filter: drop-shadow(0 8px 30px rgba(212, 175, 55, 0.5));
+.hero-section .card-inner {
+    padding:4rem 2.5rem 3.5rem;
+    background:linear-gradient(160deg, rgba(50,20,80,.95) 0%, rgba(20,8,38,.98) 100%);
 }
-.hero-sub {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.6rem;
-    color: #f5e6a3;
-    letter-spacing: 3px;
-    display: block;
+
+/* Rapunzel de fondo, grande, en la hero */
+.hero-rapunzel-bg {
+    position:absolute;
+    bottom:0;
+    right:-10px;
+    width:300px;
+    filter:drop-shadow(0 20px 60px rgba(0,0,0,.6));
+    opacity:.55;
+    z-index:1;
+}
+
+.hero-content { position:relative;z-index:2; }
+
+.hero-eyebrow {
+    font-family:'Great Vibes',cursive;
+    font-size:2.8rem;
+    color:var(--gold-light);
+    letter-spacing:2px;
+    display:block;
+    text-shadow:0 4px 20px var(--gold-glow);
 }
 .hero-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(4rem, 12vw, 7rem);
-    font-weight: 900;
-    color: #d4af37;
-    text-shadow: 0 6px 40px rgba(212, 175, 55, 0.3);
-    line-height: 1.1;
-    margin: 0.2rem 0;
+    font-family:'Cinzel',serif;
+    font-size:clamp(4.5rem,12vw,8rem);
+    font-weight:900;
+    color:var(--gold);
+    line-height:1;
+    text-shadow:0 8px 50px rgba(212,175,55,.4);
+    margin:.1rem 0 .3rem;
+    letter-spacing:3px;
 }
 .hero-name {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    color: #f5e6a3;
-    font-weight: 700;
-    letter-spacing: 4px;
-    margin-top: 0.2rem;
-}
-.hero-illustration {
-    width: min(320px, 65%);
-    margin: 1.5rem auto 0.5rem;
-    filter: drop-shadow(0 16px 50px rgba(0, 0, 0, 0.5));
-}
-.scroll-hint {
-    margin-top: 1.8rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 4px;
-    color: rgba(255, 255, 255, 0.3);
-    animation: bounceArrow 2.8s ease-in-out infinite;
-}
-@keyframes bounceArrow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(2.8rem,6vw,4.5rem);
+    color:#fff;
+    text-shadow:0 4px 30px rgba(255,255,255,.2);
+    letter-spacing:2px;
 }
 
-/* ============================================
+/* Lantern sparkles around hero name */
+.lantern-sparkle {
+    display:inline-block;
+    animation:sparkleFloat 3s ease-in-out infinite;
+    font-size:1.6rem;
+    margin:0 .5rem;
+    filter:drop-shadow(0 0 8px #d4af37);
+}
+@keyframes sparkleFloat {
+    0%,100%{transform:translateY(0) scale(1);opacity:1}
+    50%{transform:translateY(-10px) scale(1.15);opacity:.75}
+}
+
+.hero-rapunzel-main {
+    width:min(320px,70%);
+    margin:2rem auto 0;
+    filter:drop-shadow(0 20px 60px rgba(0,0,0,.6));
+    display:block;
+}
+
+.scroll-hint {
+    margin-top:2.2rem;
+    font-family:'Cinzel',serif;
+    font-size:.75rem;
+    letter-spacing:5px;
+    color:rgba(255,255,255,.25);
+    animation:bounce 3s ease-in-out infinite;
+}
+@keyframes bounce {
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(9px)}
+}
+
+/* ============================================================
    MENSAJE
-   ============================================ */
-.message-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
+   ============================================================ */
+.message-layout {
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:2.5rem;
+    align-items:center;
 }
 .message-text p {
-    font-family: 'Lora', serif;
-    font-size: 1.1rem;
-    line-height: 2;
-    font-style: italic;
-    color: #e6d5f0;
-    margin-bottom: 1rem;
+    font-family:'Lora',serif;
+    font-size:1.08rem;
+    line-height:2;
+    font-style:italic;
+    color:#ddd0ee;
+    margin-bottom:1rem;
 }
 .message-text p:last-child {
-    color: #d4af37;
-    font-weight: 600;
+    color:var(--gold);
+    font-weight:600;
+    font-size:1.12rem;
 }
-.message-illustration img {
-    width: 200px;
-    filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.3));
+.message-portrait {
+    width:180px;
+    flex-shrink:0;
+    filter:drop-shadow(0 12px 40px rgba(0,0,0,.5));
+    animation:floatG 7s ease-in-out infinite;
 }
 
-/* ============================================
+/* ============================================================
    PADRES
-   ============================================ */
-.parents-content {
-    text-align: center;
-}
+   ============================================================ */
+.parents-section { text-align:center; }
 .parents-names {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    color: #f0e8f5;
+    font-family:'Cinzel',serif;
+    font-size:clamp(1.6rem,3.5vw,2.4rem);
+    font-weight:700;
+    color:var(--cream);
+    letter-spacing:1px;
 }
-.parents-names .and {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    color: #d4af37;
-    margin: 0 0.6rem;
+.parents-sep {
+    font-family:'Great Vibes',cursive;
+    font-size:2rem;
+    color:var(--gold);
+    margin:0 .8rem;
 }
 .parents-invite {
-    font-size: 1.1rem;
-    color: #d4c4d4;
-    margin: 1.2rem 0 2rem;
-    font-style: italic;
+    font-size:1.05rem;
+    color:#c4b0d8;
+    margin:1.2rem 0 1.8rem;
+    font-style:italic;
 }
-.name-gold {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(3rem, 6vw, 4.8rem);
-    color: #d4af37;
-    text-shadow: 0 4px 30px rgba(212, 175, 55, 0.3);
-    border-top: 2px solid rgba(212, 175, 55, 0.25);
-    border-bottom: 2px solid rgba(212, 175, 55, 0.25);
-    padding: 0.6rem 0;
-    display: inline-block;
+.name-frame {
+    display:inline-block;
+    border-top:2px solid rgba(212,175,55,.4);
+    border-bottom:2px solid rgba(212,175,55,.4);
+    padding:.8rem 2.5rem;
+    margin-top:.5rem;
+}
+.name-frame-text {
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(3rem,6vw,5rem);
+    color:var(--gold);
+    text-shadow:0 6px 40px rgba(212,175,55,.35);
 }
 
-/* ============================================
-   CONTADOR
-   ============================================ */
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+.countdown-section { text-align:center; }
 .section-title {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    text-align: center;
-    color: #f0e8f5;
-    margin-bottom: 1.8rem;
-    letter-spacing: 3px;
+    font-family:'Cinzel',serif;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    color:var(--cream);
+    letter-spacing:4px;
+    margin-bottom:2rem;
 }
-.countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
-    max-width: 680px;
-    margin: 0 auto;
+.countdown-row {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+    max-width:620px;
+    margin:0 auto;
 }
-.countdown-item {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(4px);
-    border-radius: 20px;
-    padding: 1.5rem 0.3rem;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    transition: transform 0.3s ease;
+.cd-box {
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(212,175,55,.2);
+    border-radius:22px;
+    padding:1.8rem .5rem;
+    transition:transform .3s ease,border-color .3s ease;
 }
-.countdown-item:hover {
-    transform: translateY(-6px);
+.cd-box:hover {
+    transform:translateY(-8px);
+    border-color:rgba(212,175,55,.5);
 }
-.countdown-number {
-    display: block;
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    font-weight: 700;
-    line-height: 1;
+.cd-num {
+    display:block;
+    font-family:'Cinzel',serif;
+    font-size:clamp(2.5rem,5vw,4rem);
+    font-weight:700;
+    color:var(--gold);
+    line-height:1;
+    text-shadow:0 4px 20px var(--gold-glow);
 }
-.countdown-label {
-    display: block;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.7;
-    margin-top: 0.3rem;
+.cd-lbl {
+    display:block;
+    font-size:.65rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+    margin-top:.4rem;
 }
 
-/* ============================================
-   FECHA Y LUGAR
-   ============================================ */
-.date-location-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+/* ============================================================
+   FECHA & LUGAR
+   ============================================================ */
+.date-grid {
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:2rem;
+    align-items:stretch;
 }
 .date-box {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(6px);
-    border-radius: 28px;
-    padding: 2rem 1rem;
-    text-align: center;
-    border: 2px solid rgba(212, 175, 55, 0.2);
+    background:rgba(212,175,55,.07);
+    border:1.5px solid rgba(212,175,55,.3);
+    border-radius:28px;
+    padding:2.5rem 1.5rem;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:.2rem;
 }
 .date-month {
-    font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #f0e8f5;
-    letter-spacing: 5px;
+    font-family:'Cinzel',serif;
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:6px;
+    color:var(--cream);
 }
 .date-day {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(4.5rem, 10vw, 7rem);
-    font-weight: 900;
-    color: #d4af37;
-    line-height: 1;
-    margin: 0.2rem 0;
+    font-family:'Cinzel',serif;
+    font-size:clamp(5rem,11vw,8rem);
+    font-weight:900;
+    color:var(--gold);
+    line-height:1;
+    text-shadow:0 8px 50px rgba(212,175,55,.4);
 }
 .date-year {
-    font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #f0e8f5;
-    letter-spacing: 3px;
+    font-family:'Cinzel',serif;
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:4px;
+    color:var(--cream);
 }
 .date-weekday {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: #d4c4d4;
-    letter-spacing: 2px;
+    font-family:'Cinzel',serif;
+    font-size:1rem;
+    letter-spacing:3px;
+    color:var(--lavender);
+    margin-top:.3rem;
 }
 .location-box {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(6px);
-    border-radius: 28px;
-    padding: 2rem 1rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:28px;
+    padding:2.5rem 1.8rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:1rem;
 }
 .location-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.5rem;
-    color: #f0e8f5;
+    font-family:'Great Vibes',cursive;
+    font-size:2.8rem;
+    color:var(--cream);
+    text-align:center;
 }
 .location-detail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    margin: 0.5rem 0;
-    font-size: 1.05rem;
-    color: #e6d5f0;
+    display:flex;
+    align-items:center;
+    gap:.8rem;
+    font-size:1rem;
+    color:#ddd0ee;
+    justify-content:center;
 }
+.location-icon { font-size:1.3rem; }
 .btn-map {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.2rem;
-    background: linear-gradient(135deg, #d4af37, #ffd700);
-    color: #0b0812;
-    padding: 0.7rem 2rem;
-    border-radius: 60px;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.25);
-    transition: all 0.3s ease;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    background:linear-gradient(135deg,var(--gold),#ffd700);
+    color:#0b0812;
+    padding:.85rem 2rem;
+    border-radius:60px;
+    text-decoration:none;
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:1.5px;
+    box-shadow:0 8px 30px rgba(212,175,55,.3);
+    transition:all .3s ease;
+    margin-top:.5rem;
 }
-.btn-map:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 40px rgba(212, 175, 55, 0.5);
-}
+.btn-map:hover { transform:translateY(-4px);box-shadow:0 16px 45px rgba(212,175,55,.55); }
 
-/* ============================================
-   VESTIMENTA (rediseñada completamente)
-   ============================================ */
-.dresscode-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
+/* ============================================================
+   VESTIMENTA
+   ============================================================ */
+.dresscode-section { text-align:center; }
+.dresscode-row {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem;
+    max-width:520px;
+    margin:0 auto 2rem;
 }
-.dresscode-item {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(6px);
-    border-radius: 28px;
-    padding: 2rem 1rem;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
+.dc-item {
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(212,175,55,.15);
+    border-radius:26px;
+    padding:2.2rem 1rem;
+    transition:all .4s ease;
+    position:relative;
+    overflow:hidden;
 }
-.dresscode-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
-    opacity: 0;
-    transition: opacity 0.4s ease;
+.dc-item::after {
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(212,175,55,.07),transparent);
+    opacity:0;
+    transition:opacity .4s ease;
+    border-radius:26px;
 }
-.dresscode-item:hover {
-    transform: translateY(-10px);
-    border-color: rgba(212, 175, 55, 0.3);
+.dc-item:hover { transform:translateY(-10px);border-color:rgba(212,175,55,.4); }
+.dc-item:hover::after { opacity:1; }
+.dc-icon { font-size:3.5rem;display:block;margin-bottom:.5rem; }
+.dc-title {
+    font-family:'Cinzel',serif;
+    font-size:1.3rem;
+    color:var(--cream);
+    letter-spacing:2px;
 }
-.dresscode-item:hover::before {
-    opacity: 1;
-}
-.dresscode-icon {
-    font-size: 4rem;
-    display: block;
-    margin-bottom: 0.3rem;
-}
-.dresscode-item h4 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    color: #f0e8f5;
-    letter-spacing: 2px;
-}
-.dresscode-desc {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.4);
-    margin-top: 0.2rem;
-    letter-spacing: 1px;
+.dc-sub {
+    font-size:.8rem;
+    color:rgba(255,255,255,.35);
+    letter-spacing:1px;
+    margin-top:.25rem;
 }
 .dresscode-note {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(4px);
-    border-radius: 60px;
-    padding: 1.5rem 2rem;
-    text-align: center;
-    max-width: 550px;
-    margin: 0 auto;
-    border: 1px solid rgba(212, 175, 55, 0.08);
+    background:rgba(212,175,55,.08);
+    border:1px solid rgba(212,175,55,.2);
+    border-radius:60px;
+    padding:1.5rem 2.5rem;
+    max-width:520px;
+    margin:0 auto;
 }
-.dresscode-note p {
-    font-size: 1.05rem;
-    color: #d4c4d4;
-    margin-bottom: 0.3rem;
-}
+.dresscode-note p { font-size:1rem;color:#c4b0d8;margin-bottom:.3rem; }
 .dresscode-note strong {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
-    color: #d4af37;
-    display: block;
+    font-family:'Great Vibes',cursive;
+    font-size:1.9rem;
+    color:var(--gold);
+    display:block;
 }
 
-/* ============================================
-   REGALOS
-   ============================================ */
-.gift-box {
-    text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
-}
+/* ============================================================
+   REGALO
+   ============================================================ */
+.gift-section { text-align:center; }
 .gift-icon {
-    font-size: 4.5rem;
-    color: #d4af37;
-    display: block;
-    margin-bottom: 0.3rem;
-    opacity: 0.8;
+    font-size:4rem;
+    color:var(--gold);
+    display:block;
+    margin-bottom:1rem;
+    filter:drop-shadow(0 4px 16px var(--gold-glow));
+    animation:floatG 6s ease-in-out infinite;
 }
 .gift-text {
-    font-family: 'Lora', serif;
-    font-size: 1.15rem;
-    line-height: 2;
-    color: #e6d5f0;
+    font-family:'Lora',serif;
+    font-size:1.1rem;
+    line-height:2;
+    color:#ddd0ee;
+    max-width:480px;
+    margin:0 auto;
 }
 
-/* ============================================
+/* ============================================================
    RSVP
-   ============================================ */
-.rsvp-box {
-    text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
-}
+   ============================================================ */
+.rsvp-section { text-align:center; }
 .rsvp-text {
-    font-family: 'Lora', serif;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 1.8rem;
-    color: #e6d5f0;
+    font-family:'Lora',serif;
+    font-size:1.08rem;
+    line-height:1.9;
+    color:#ddd0ee;
+    margin-bottom:2rem;
 }
 .btn-whatsapp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: #25d366;
-    color: white;
-    padding: 0.9rem 2.5rem;
-    border-radius: 60px;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.25);
-    transition: all 0.3s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:.7rem;
+    background:#25d366;
+    color:#fff;
+    padding:1rem 2.8rem;
+    border-radius:60px;
+    text-decoration:none;
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:.9rem;
+    letter-spacing:1.5px;
+    box-shadow:0 8px 30px rgba(37,211,102,.3);
+    transition:all .3s ease;
 }
-.btn-whatsapp:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 40px rgba(37, 211, 102, 0.5);
-}
+.btn-whatsapp:hover { transform:translateY(-5px);box-shadow:0 16px 45px rgba(37,211,102,.55); }
 
-/* ============================================
+/* ============================================================
    CIERRE
-   ============================================ */
-.closing-card {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(8px);
-    border-radius: 40px;
-    padding: 3rem 1.5rem;
-}
+   ============================================================ */
+.closing-section { text-align:center; }
 .closing-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(3rem, 6vw, 4.8rem);
-    color: #d4af37;
-    text-shadow: 0 4px 40px rgba(212, 175, 55, 0.3);
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(3rem,7vw,5.5rem);
+    color:var(--gold);
+    text-shadow:0 6px 50px rgba(212,175,55,.4);
+    display:block;
+    margin-bottom:2rem;
 }
-.closing-illustration {
-    width: min(280px, 60%);
-    margin: 1.2rem auto 0;
-    filter: drop-shadow(0 16px 50px rgba(0, 0, 0, 0.4));
+.closing-rapunzel {
+    width:min(280px,65%);
+    margin:0 auto;
+    display:block;
+    filter:drop-shadow(0 20px 60px rgba(0,0,0,.5));
+    animation:floatS 9s ease-in-out infinite;
 }
 
-/* ============================================
+/* ============================================================
    FOOTER
-   ============================================ */
+   ============================================================ */
 .footer {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 0.85rem;
-    padding: 1.5rem 0 0.5rem;
-    font-family: 'Lora', serif;
+    text-align:center;
+    color:rgba(255,255,255,.18);
+    font-size:.82rem;
+    padding:1rem 0;
+    font-family:'Lora',serif;
+    position:relative;
+    z-index:1;
 }
 
-/* ============================================
+/* ============================================================
    RESPONSIVE
-   ============================================ */
-@media (max-width: 768px) {
-    body { padding: 1rem 0.6rem; }
-    .invitation-wrapper { gap: 2rem; }
-    .card { padding: 1.8rem 1.2rem; border-radius: 28px; }
-    .message-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .message-illustration { order: -1; }
-    .message-illustration img { width: 140px; }
-    .date-location-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .countdown-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-    .countdown-item { padding: 1rem 0.2rem; }
-    .hero-card { padding: 2rem 1rem; }
-    .hero-crown { width: 80px; }
-    .hero-sub { font-size: 2rem; }
-    .dresscode-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-    .name-gold { font-size: 2.6rem; }
-    .music-btn { top: 1rem; right: 1rem; width: 48px; height: 48px; font-size: 1.4rem; }
-    .deco-top, .deco-bottom { font-size: 0.9rem; letter-spacing: 5px; }
-    .deco-top { top: -10px; }
-    .deco-bottom { bottom: -10px; }
-    .moon { width: 80px; height: 80px; top: 5%; right: 5%; }
-}
+   ============================================================ */
+@media (max-width:768px) {
+    .invitation-wrapper { padding:1.5rem .8rem 3rem; gap:0; }
+    .card-inner { padding:2.5rem 1.5rem; border-radius:28px; }
+    .section { margin-bottom:2.5rem; border-radius:28px; }
 
-@media (max-width: 480px) {
-    .card { padding: 1.2rem 0.8rem; }
-    .dresscode-grid { grid-template-columns: 1fr; max-width: 260px; }
-    .btn-whatsapp, .btn-map { width: 100%; justify-content: center; }
-    .hero-title { font-size: 3.6rem; }
-    .hero-name { font-size: 1.4rem; }
-    .hero-illustration { width: 75%; }
-    .countdown-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-    .countdown-item { padding: 0.6rem 0.1rem; }
-    .countdown-number { font-size: 2rem; }
-    .date-day { font-size: 4rem; }
-    .deco-top, .deco-bottom { font-size: 0.7rem; letter-spacing: 3px; height: 16px; }
-    .deco-top { top: -8px; }
-    .deco-bottom { bottom: -8px; }
-    .moon { width: 60px; height: 60px; top: 3%; right: 3%; }
+    .message-layout { grid-template-columns:1fr; }
+    .message-portrait { width:130px;margin:0 auto; order:-1; }
+
+    .date-grid { grid-template-columns:1fr; }
+
+    .countdown-row { grid-template-columns:repeat(2,1fr);gap:.8rem; }
+    .cd-box { padding:1.2rem .3rem; }
+
+    .deco-rama-seca { width:170px;right:-30px;top:-40px; }
+    .deco-rama-hojas { width:180px;left:-30px;top:-38px; }
+    .deco-flores-left  { width:130px; }
+    .deco-flores-right { width:120px; }
+    .deco-trenza { width:110px; }
+    .hero-rapunzel-bg { width:200px; }
+
+    .moon { width:80px;height:80px;top:4%;right:4%; }
+}
+@media (max-width:480px) {
+    .card-inner { padding:1.8rem 1rem; border-radius:22px; }
+    .hero-title { font-size:3.5rem; }
+    .date-day { font-size:4.5rem; }
+    .dresscode-row { grid-template-columns:1fr;max-width:240px; }
+    .btn-whatsapp,.btn-map { width:100%;justify-content:center; }
+    .deco-rama-seca,.deco-rama-hojas { width:130px; }
+    .deco-flores-left,.deco-flores-right { width:100px; }
+    .moon { width:60px;height:60px; }
 }
