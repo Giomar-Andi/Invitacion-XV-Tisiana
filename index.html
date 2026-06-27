@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>XV Antonella · Noche Estrellada</title>
-    
-    <!-- ===== FAVICON CON PASCAL ===== -->
+    <title>XV Antonella · Invitación de Ensueño</title>
     <link rel="icon" href="images/pascal.png" type="image/png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="images/pascal.png" sizes="180x180" />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-    <!-- ===== FONDO ESTRELLADO ===== -->
-    <div class="night-sky">
+    <!-- ===== FONDO CON ESTRELLAS Y LUNA ===== -->
+    <div class="bg-container">
         <div class="moon"></div>
-        <div id="stars-container"></div>
+        <div id="stars"></div>
+        <div class="glow-spot glow-1"></div>
+        <div class="glow-spot glow-2"></div>
     </div>
 
-    <!-- ===== MÚSICA ===== -->
-    <button class="music-btn" id="musicBtn" aria-label="Control de música">
+    <!-- ===== BOTÓN DE MÚSICA ===== -->
+    <button class="music-btn" id="musicBtn">
         <span class="music-icon">♫</span>
     </button>
     <audio id="bgMusic" loop>
@@ -32,21 +30,20 @@
     <div class="invitation-wrapper">
 
         <!-- ===== HERO ===== -->
-        <section class="hero card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+        <section class="card hero-card">
+            <div class="deco-top">❀ ✿ ❀</div>
             <img src="images/corona.png" alt="Corona" class="hero-crown float-icon" />
             <span class="hero-sub">Mis</span>
             <h1 class="hero-title">XV Años</h1>
             <p class="hero-name">Antonella Luana</p>
             <img src="images/rapunzel.png" alt="Rapunzel" class="hero-illustration float-slow" />
-            <div class="hero-scroll">✦ Desliza ✦</div>
+            <div class="scroll-hint">✦ Desliza ✦</div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== MENSAJE ===== -->
         <section class="card message-card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+            <div class="deco-top">❀ ✿ ❀</div>
             <div class="message-grid">
                 <div class="message-text">
                     <p>Con la bendición de Dios y el amor que mi familia me ha dado, me siento feliz de llegar a este momento de mi vida.</p>
@@ -57,12 +54,12 @@
                     <img src="images/pascal.png" alt="Pascal" class="float-icon" />
                 </div>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== PADRES ===== -->
         <section class="card parents-card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+            <div class="deco-top">❀ ✿ ❀</div>
             <div class="parents-content">
                 <div class="parents-names">
                     Elena Meza <span class="and">✦</span> Juan Casas
@@ -70,12 +67,12 @@
                 <p class="parents-invite">Tienen el honor de invitarlos a festejar los XV años de su hija</p>
                 <div class="name-gold">Antonella Luana</div>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== CONTADOR ===== -->
         <section class="card countdown-card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+            <div class="deco-top">❀ ✿ ❀</div>
             <h2 class="section-title">Faltan</h2>
             <div class="countdown-grid" id="countdown">
                 <div class="countdown-item">
@@ -95,12 +92,12 @@
                     <span class="countdown-label">Segundos</span>
                 </div>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== FECHA Y LUGAR ===== -->
-        <section class="card date-card-full">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+        <section class="card date-card">
+            <div class="deco-top">❀ ✿ ❀</div>
             <div class="date-location-grid">
                 <div class="date-box">
                     <div class="date-month">JULIO</div>
@@ -115,12 +112,12 @@
                     <a href="#" class="btn-map">▸ Cómo Llegar</a>
                 </div>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== VESTIMENTA ===== -->
         <section class="card dresscode-card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+            <div class="deco-top">❀ ✿ ❀</div>
             <h2 class="section-title">Código de Vestimenta</h2>
             <div class="dresscode-grid">
                 <div class="dresscode-item">
@@ -136,34 +133,35 @@
                 <p>Se reserva el color morado</p>
                 <strong>¡Déjame el color de la Quinceañera!</strong>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== REGALOS ===== -->
         <section class="card gift-card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+            <div class="deco-top">❀ ✿ ❀</div>
             <div class="gift-box">
                 <span class="gift-icon float-icon">✧</span>
                 <p class="gift-text">Tu presencia es el mejor regalo.<br />Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.</p>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== RSVP ===== -->
         <section class="card rsvp-card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+            <div class="deco-top">❀ ✿ ❀</div>
             <div class="rsvp-box">
                 <p class="rsvp-text">Te agradecemos que confirmes tu asistencia al siguiente WhatsApp</p>
                 <a href="#" class="btn-whatsapp">✦ Confirmar por WhatsApp</a>
             </div>
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== CIERRE ===== -->
-        <section class="closing card">
-            <div class="branch-border branch-top"></div>
-            <div class="branch-border branch-bottom"></div>
+        <section class="card closing-card">
+            <div class="deco-top">❀ ✿ ❀</div>
             <h2 class="closing-title">¡Te Esperamos!</h2>
             <img src="images/rapunzel.png" alt="Rapunzel" class="closing-illustration float-slow" />
+            <div class="deco-bottom">❀ ✿ ❀</div>
         </section>
 
         <!-- ===== FOOTER ===== -->
@@ -176,12 +174,11 @@
     <script>
         // ===== ESTRELLAS =====
         (function() {
-            const container = document.getElementById('stars-container');
-            const count = 120;
-            for (let i = 0; i < count; i++) {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                const size = Math.random() * 3 + 1;
+                const size = Math.random() * 2.5 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
