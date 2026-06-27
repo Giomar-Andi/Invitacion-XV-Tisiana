@@ -1,34 +1,33 @@
 /* ============================================
    INVITACIÓN XV AÑOS - RAPUNZEL
-   Funcionalidad Premium
+   Código JavaScript Profesional y Modular
    ============================================ */
 
-// Configuración
+// Configuración centralizada
 const CONFIG = {
-    // Fecha del evento: 17 de julio de 2026, 8:00 PM (hora peruana UTC-5)
     eventDate: new Date('2026-07-17T20:00:00-05:00'),
-    eventName: 'XV Años - Antonella Luana',
-    whatsappNumber: '51999999999', // CAMBIA ESTO POR EL NÚMERO REAL
-    locationQuery: 'Calle+Diseñarte+Lima+Peru'
+    whatsappNumber: '51999999999', // CAMBIAR
+    eventName: 'Antonella Luana',
+    musicVolume: 0.5
 };
 
 // Estado de la aplicación
 const AppState = {
-    currentSection: 0,
     isMusicPlaying: false,
-    envelopeOpened: false,
-    sections: []
+    countdownInterval: null,
+    navOpen: false
 };
 
-// Elementos del DOM
+// Referencias al DOM
 const DOM = {
-    loadingScreen: document.getElementById('loadingScreen'),
-    musicBtn: document.getElementById('musicBtn'),
+    loader: document.getElementById('loader'),
+    navbar: document.getElementById('navbar'),
+    navToggle: document.getElementById('navToggle'),
+    navMenu: document.getElementById('navMenu'),
+    musicControl: document.getElementById('musicControl'),
     bgMusic: document.getElementById('bgMusic'),
-    envelope: document.getElementById('envelope'),
-    waxSeal: document.getElementById('waxSeal'),
-    heartBtn: document.getElementById('heartBtn'),
-    countdownElements: {
+    heartButton: document.getElementById('heartButton'),
+    countdown: {
         days: document.getElementById('days'),
         hours: document.getElementById('hours'),
         minutes: document.getElementById('minutes'),
@@ -47,74 +46,90 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeApp() {
-    // Ocultar pantalla de carga
+    // Ocultar loader
     setTimeout(() => {
-        if (DOM.loadingScreen) {
-            DOM.loadingScreen.classList.add('fade-out');
-            setTimeout(() => {
-                DOM.loadingScreen.style.display = 'none';
-            }, 1000);
+        if (DOM.loader) {
+            DOM.loader.classList.add('hidden');
         }
-    }, 2500);
+    }, 2000);
 
-    // Obtener todas las secciones
-    AppState.sections = document.querySelectorAll('.section');
-    
-    // Inicializar contador de secciones
-    updateVisibleSection();
+    // Iniciar countdown
+    startCountdown();
+
+    // Verificar scroll para navbar
+    window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
 function setupEventListeners() {
-    // Abrir sobre
-    if (DOM.envelope) {
-        DOM.envelope.addEventListener('click', openEnvelope);
+    // Navegación móvil
+    if (DOM.navToggle && DOM.navMenu) {
+        DOM.navToggle.addEventListener('click', toggleNavMenu);
+        
+        // Cerrar menú al hacer click en un link
+        DOM.navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeNavMenu();
+            });
+        });
     }
 
     // Control de música
-    if (DOM.musicBtn) {
-        DOM.musicBtn.addEventListener('click', toggleMusic);
+    if (DOM.musicControl) {
+        DOM.musicControl.addEventListener('click', toggleMusic);
     }
 
     // Botón corazón
-    if (DOM.heartBtn) {
-        DOM.heartBtn.addEventListener('click', playMusicWithHeart);
+    if (DOM.heartButton) {
+        DOM.heartButton.addEventListener('click', playMusicWithHeart);
     }
 
-    // Scroll con rueda del mouse
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    
-    // Touch events para móvil
-    let touchStartY = 0;
-    window.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    window.addEventListener('touchend', (e) => {
-        const touchEndY = e.changedTouches[0].clientY;
-        handleTouchScroll(touchStartY, touchEndY);
-    }, { passive: true });
-
-    // Actualizar sección visible en scroll
-    window.addEventListener('scroll', updateVisibleSection, { passive: true });
+    // Smooth scroll para anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
 }
 
 // ============================================
-// SOBRE MÁGICO
+// NAVEGACIÓN
 // ============================================
 
-function openEnvelope() {
-    if (AppState.envelopeOpened) return;
+function toggleNavMenu() {
+    AppState.navOpen = !AppState.navOpen;
     
-    AppState.envelopeOpened = true;
-    DOM.envelope.classList.add('open');
+    if (AppState.navOpen) {
+        DOM.navMenu.classList.add('active');
+        DOM.navToggle.textContent = '✕';
+        document.body.style.overflow = 'hidden';
+    } else {
+        closeNavMenu();
+    }
+}
+
+function closeNavMenu() {
+    AppState.navOpen = false;
+    DOM.navMenu.classList.remove('active');
+    DOM.navToggle.textContent = '☰';
+    document.body.style.overflow = '';
+}
+
+function handleScroll() {
+    const scrollTop = window.scrollY;
     
-    // Efecto de sonido opcional
-    playSound('open');
-    
-    // Esperar animación y mostrar siguiente sección
-    setTimeout(() => {
-        showSection(1); // Hero section (índice 1)
-    }, 1200);
+    // Agregar clase scrolled al navbar
+    if (scrollTop > 100) {
+        DOM.navbar.classList.add('scrolled');
+    } else {
+        DOM.navbar.classList.remove('scrolled');
+    }
 }
 
 // ============================================
@@ -123,7 +138,7 @@ function openEnvelope() {
 
 function toggleMusic() {
     if (!DOM.bgMusic) return;
-    
+
     if (AppState.isMusicPlaying) {
         pauseMusic();
     } else {
@@ -133,35 +148,46 @@ function toggleMusic() {
 
 function playMusic() {
     if (!DOM.bgMusic) return;
+
+    DOM.bgMusic.volume = CONFIG.musicVolume;
     
     DOM.bgMusic.play().then(() => {
         AppState.isMusicPlaying = true;
-        DOM.musicBtn.classList.add('playing');
-        DOM.musicBtn.querySelector('.music-icon').textContent = '🎶';
+        DOM.musicControl.classList.add('playing');
+        DOM.musicControl.querySelector('.music-icon').textContent = '🎶';
+        
+        // Actualizar botón corazón
+        if (DOM.heartButton) {
+            DOM.heartButton.querySelector('.heart-text').textContent = 'Música reproduciendo';
+        }
     }).catch(error => {
-        console.log('Error al reproducir música:', error);
+        console.error('Error al reproducir música:', error);
         showNotification('Toca el corazón para iniciar la música 💜');
     });
 }
 
 function pauseMusic() {
     if (!DOM.bgMusic) return;
-    
+
     DOM.bgMusic.pause();
     AppState.isMusicPlaying = false;
-    DOM.musicBtn.classList.remove('playing');
-    DOM.musicBtn.querySelector('.music-icon').textContent = '🎵';
+    DOM.musicControl.classList.remove('playing');
+    DOM.musicControl.querySelector('.music-icon').textContent = '🎵';
+    
+    if (DOM.heartButton) {
+        DOM.heartButton.querySelector('.heart-text').textContent = 'Toca para escuchar';
+    }
 }
 
 function playMusicWithHeart() {
     if (!AppState.isMusicPlaying) {
         playMusic();
         
-        // Animación del corazón
-        DOM.heartBtn.style.transform = 'scale(1.3)';
+        // Animación del botón
+        DOM.heartButton.style.transform = 'scale(0.95)';
         setTimeout(() => {
-            DOM.heartBtn.style.transform = 'scale(1)';
-        }, 300);
+            DOM.heartButton.style.transform = 'scale(1)';
+        }, 150);
     }
 }
 
@@ -171,7 +197,7 @@ function playMusicWithHeart() {
 
 function startCountdown() {
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    AppState.countdownInterval = setInterval(updateCountdown, 1000);
 }
 
 function updateCountdown() {
@@ -180,10 +206,10 @@ function updateCountdown() {
 
     if (difference <= 0) {
         // El evento ya comenzó
-        DOM.countdownElements.days.textContent = '00';
-        DOM.countdownElements.hours.textContent = '00';
-        DOM.countdownElements.minutes.textContent = '00';
-        DOM.countdownElements.seconds.textContent = '00';
+        setCountdownValue('00', '00', '00', '00');
+        if (AppState.countdownInterval) {
+            clearInterval(AppState.countdownInterval);
+        }
         return;
     }
 
@@ -192,89 +218,35 @@ function updateCountdown() {
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    // Actualizar DOM con animación
-    updateCountdownNumber(DOM.countdownElements.days, days);
-    updateCountdownNumber(DOM.countdownElements.hours, hours);
-    updateCountdownNumber(DOM.countdownElements.minutes, minutes);
-    updateCountdownNumber(DOM.countdownElements.seconds, seconds);
+    setCountdownValue(
+        padNumber(days),
+        padNumber(hours),
+        padNumber(minutes),
+        padNumber(seconds)
+    );
 }
 
-function updateCountdownNumber(element, value) {
-    const stringValue = String(value).padStart(2, '0');
-    if (element.textContent !== stringValue) {
+function setCountdownValue(days, hours, minutes, seconds) {
+    updateCountdownElement(DOM.countdown.days, days);
+    updateCountdownElement(DOM.countdown.hours, hours);
+    updateCountdownElement(DOM.countdown.minutes, minutes);
+    updateCountdownElement(DOM.countdown.seconds, seconds);
+}
+
+function updateCountdownElement(element, value) {
+    if (element && element.textContent !== value) {
         element.style.transform = 'scale(1.2)';
+        element.style.transition = 'transform 0.2s ease';
+        
         setTimeout(() => {
-            element.textContent = stringValue;
+            element.textContent = value;
             element.style.transform = 'scale(1)';
         }, 200);
     }
 }
 
-// ============================================
-// NAVEGACIÓN ENTRE SECCIONES
-// ============================================
-
-function showSection(index) {
-    if (index < 0 || index >= AppState.sections.length) return;
-    
-    // Ocultar sección actual
-    AppState.sections[AppState.currentSection].classList.add('hidden');
-    
-    // Mostrar nueva sección
-    AppState.sections[index].classList.remove('hidden');
-    AppState.currentSection = index;
-    
-    // Scroll suave a la sección
-    AppState.sections[index].scrollIntoView({ behavior: 'smooth' });
-    
-    // Iniciar cuenta regresiva si es la sección correspondiente
-    if (index === 4) { // Sección de countdown
-        startCountdown();
-    }
-}
-
-function handleScroll(e) {
-    e.preventDefault();
-    
-    const delta = Math.sign(e.deltaY);
-    
-    if (delta > 0 && AppState.currentSection < AppState.sections.length - 1) {
-        showSection(AppState.currentSection + 1);
-    } else if (delta < 0 && AppState.currentSection > 0) {
-        showSection(AppState.currentSection - 1);
-    }
-}
-
-function handleTouchScroll(startY, endY) {
-    const threshold = 50;
-    const diff = startY - endY;
-    
-    if (Math.abs(diff) > threshold) {
-        if (diff > 0 && AppState.currentSection < AppState.sections.length - 1) {
-            showSection(AppState.currentSection + 1);
-        } else if (diff < 0 && AppState.currentSection > 0) {
-            showSection(AppState.currentSection - 1);
-        }
-    }
-}
-
-function updateVisibleSection() {
-    const scrollPosition = window.scrollY + window.innerHeight / 2;
-    
-    AppState.sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            AppState.currentSection = index;
-            
-            // Iniciar countdown si llegamos a esa sección
-            if (index === 4 && !AppState.countdownStarted) {
-                startCountdown();
-                AppState.countdownStarted = true;
-            }
-        }
-    });
+function padNumber(num) {
+    return String(num).padStart(2, '0');
 }
 
 // ============================================
@@ -287,18 +259,18 @@ function registerServiceWorker() {
             .then(registration => {
                 console.log('✅ Service Worker registrado:', registration);
                 
-                // Verificar actualizaciones
-                registration.addEventListener('updatefound', () => {
-                    console.log('🔄 Actualización disponible');
-                });
+                // Verificar actualizaciones periódicamente
+                setInterval(() => {
+                    registration.update();
+                }, 60 * 60 * 1000); // Cada hora
             })
             .catch(error => {
-                console.log('❌ Error al registrar Service Worker:', error);
+                console.error('❌ Error al registrar Service Worker:', error);
             });
-            
-        // Escuchar cambios en el Service Worker
+
+        // Escuchar cambios
         navigator.serviceWorker.addEventListener('message', event => {
-            console.log('Mensaje del Service Worker:', event.data);
+            console.log('Mensaje del SW:', event.data);
         });
     }
 }
@@ -307,133 +279,155 @@ function registerServiceWorker() {
 // UTILIDADES
 // ============================================
 
-function playSound(type) {
-    // Aquí puedes agregar sonidos opcionales
-    // Por ejemplo: sonido de sobre abriéndose
-    console.log(' Sonido:', type);
-}
+function showNotification(message, duration = 3000) {
+    // Remover notificación anterior si existe
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
 
-function showNotification(message) {
-    // Crear notificación temporal
+    // Crear notificación
     const notification = document.createElement('div');
     notification.className = 'notification';
-    notification.textContent = message;
+    notification.innerHTML = `
+        <span>${message}</span>
+    `;
+    
     notification.style.cssText = `
         position: fixed;
         bottom: 30px;
         left: 50%;
-        transform: translateX(-50%);
-        background: rgba(107, 78, 113, 0.9);
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(107, 78, 113, 0.95);
         color: white;
         padding: 15px 30px;
         border-radius: 50px;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
         z-index: 10000;
         box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        animation: slideUp 0.3s ease;
+        opacity: 0;
+        transition: all 0.3s ease;
     `;
     
     document.body.appendChild(notification);
     
+    // Animar entrada
+    requestAnimationFrame(() => {
+        notification.style.transform = 'translateX(-50%) translateY(0)';
+        notification.style.opacity = '1';
+    });
+    
+    // Remover después del tiempo especificado
     setTimeout(() => {
-        notification.style.animation = 'slideDown 0.3s ease';
+        notification.style.transform = 'translateX(-50%) translateY(100px)';
+        notification.style.opacity = '0';
+        
         setTimeout(() => {
             notification.remove();
         }, 300);
-    }, 3000);
+    }, duration);
 }
 
-function formatWhatsAppMessage() {
-    return `¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20${CONFIG.eventName}`;
-}
+// Lazy loading para imágenes
+function setupLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                }
+            });
+        });
 
-// Agregar animaciones CSS dinámicas
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translate(-50%, 30px);
-        }
-        to {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
     }
-    
-    @keyframes slideDown {
-        from {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
-        to {
-            opacity: 0;
-            transform: translate(-50%, 30px);
-        }
-    }
-    
-    .countdown-number {
-        transition: transform 0.3s ease;
-    }
-`;
-document.head.appendChild(style);
-
-// ============================================
-// DETECCIÓN DE DISPOSITIVO
-// ============================================
-
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-function isTablet() {
-    return /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
-}
+// Preload de imágenes críticas
+function preloadCriticalImages() {
+    const criticalImages = [
+        'images/corona.png',
+        'images/rapunzel.png',
+        'images/pascal.png'
+    ];
 
-// Agregar clase al body según dispositivo
-if (isMobile()) {
-    document.body.classList.add('is-mobile');
-} else if (isTablet()) {
-    document.body.classList.add('is-tablet');
-} else {
-    document.body.classList.add('is-desktop');
-}
-
-// ============================================
-// PRECARGA DE IMÁGENES
-// ============================================
-
-function preloadImages(images) {
-    images.forEach(src => {
+    criticalImages.forEach(src => {
         const img = new Image();
         img.src = src;
     });
 }
 
-// Precargar imágenes importantes
-window.addEventListener('load', () => {
-    preloadImages([
-        'images/corona.png',
-        'images/rapunzel.png',
-        'images/pascal.png',
-        'images/flores.png',
-        'images/sol.png'
-    ]);
+// Inicializar lazy loading cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    preloadCriticalImages();
+    setupLazyLoading();
 });
 
 // ============================================
-// EFECTOS DE PARTÍCULAS (OPCIONAL)
+// ANIMACIONES ADICIONALES
+// ============================================
+
+// Intersection Observer para animaciones al scroll
+function setupScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observar secciones
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(50px)';
+        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(section);
+    });
+}
+
+// Agregar estilos para animaciones
+const animationStyles = document.createElement('style');
+animationStyles.textContent = `
+    .animate-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+`;
+document.head.appendChild(animationStyles);
+
+// Inicializar animaciones de scroll
+document.addEventListener('DOMContentLoaded', setupScrollAnimations);
+
+// ============================================
+// EFECTOS DE PARTÍCULAS
 // ============================================
 
 function createSparkle(x, y) {
     const sparkle = document.createElement('div');
     sparkle.className = 'sparkle-particle';
+    
+    const size = Math.random() * 10 + 5;
     sparkle.style.cssText = `
         position: fixed;
         left: ${x}px;
         top: ${y}px;
-        width: 10px;
-        height: 10px;
+        width: ${size}px;
+        height: ${size}px;
         background: radial-gradient(circle, #FFD700 0%, transparent 70%);
         border-radius: 50%;
         pointer-events: none;
@@ -448,16 +442,19 @@ function createSparkle(x, y) {
     }, 1000);
 }
 
-// Agregar efecto de brillo al hacer click
+// Agregar sparkle aleatorio (30% probabilidad al hacer click)
 document.addEventListener('click', (e) => {
-    if (Math.random() > 0.7) { // 30% de probabilidad
+    // Ignorar clicks en botones y links
+    if (e.target.closest('button') || e.target.closest('a')) return;
+    
+    if (Math.random() > 0.7) {
         createSparkle(e.clientX, e.clientY);
     }
 });
 
-// Agregar animación de sparkle
-const sparkleStyle = document.createElement('style');
-sparkleStyle.textContent = `
+// Agregar keyframes de sparkle
+const sparkleStyles = document.createElement('style');
+sparkleStyles.textContent = `
     @keyframes sparkleFade {
         0% {
             opacity: 1;
@@ -472,11 +469,116 @@ sparkleStyle.textContent = `
             transform: scale(0.5) rotate(360deg) translateY(-50px);
         }
     }
-    
-    .sparkle-particle {
-        pointer-events: none;
-    }
 `;
-document.head.appendChild(sparkleStyle);
+document.head.appendChild(sparkleStyles);
 
-console.log('✨ Invitación XV Años - Rapunzel cargada correctamente ✨');
+// ============================================
+// DETECCIÓN DE DISPOSITIVO
+// ============================================
+
+function detectDevice() {
+    const userAgent = navigator.userAgent;
+    
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+        document.body.classList.add('is-mobile');
+        return 'mobile';
+    } else if (/iPad|Android(?!.*Mobile)/i.test(userAgent)) {
+        document.body.classList.add('is-tablet');
+        return 'tablet';
+    } else {
+        document.body.classList.add('is-desktop');
+        return 'desktop';
+    }
+}
+
+// Detectar dispositivo al cargar
+document.addEventListener('DOMContentLoaded', detectDevice);
+
+// ============================================
+// PERFORMANCE OPTIMIZATION
+// ============================================
+
+// Debounce para resize
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Manejar resize de ventana
+const handleResize = debounce(() => {
+    // Cerrar menú móvil si está abierto
+    if (AppState.navOpen && window.innerWidth > 768) {
+        closeNavMenu();
+    }
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+// ============================================
+// ACCESIBILIDAD
+// ============================================
+
+// Navegación con teclado
+document.addEventListener('keydown', (e) => {
+    // Cerrar menú con ESC
+    if (e.key === 'Escape' && AppState.navOpen) {
+        closeNavMenu();
+    }
+    
+    // Control de música con barra espaciadora (si no está en un input)
+    if (e.key === ' ' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        toggleMusic();
+    }
+});
+
+// ============================================
+// ANALYTICS (OPCIONAL)
+// ============================================
+
+function trackEvent(eventName, eventData = {}) {
+    // Aquí puedes integrar Google Analytics, Facebook Pixel, etc.
+    console.log(`📊 Event: ${eventName}`, eventData);
+    
+    // Ejemplo con Google Analytics:
+    // if (typeof gtag !== 'undefined') {
+    //     gtag('event', eventName, eventData);
+    // }
+}
+
+// Trackear visitas a secciones
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section');
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                if (sectionId) {
+                    trackEvent('section_view', { section: sectionId });
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+});
+
+// Trackear clicks en botones importantes
+document.querySelectorAll('.btn-primary, .btn-large').forEach(button => {
+    button.addEventListener('click', () => {
+        const buttonText = button.textContent.trim();
+        trackEvent('button_click', { button: buttonText });
+    });
+});
+
+console.log('✨ Invitación XV Años - Antonella Luana cargada correctamente ✨');
