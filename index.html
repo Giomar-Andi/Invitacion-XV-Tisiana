@@ -4,101 +4,111 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>XV Antonella · Invitación de Ensueño</title>
-    <link rel="icon" href="images/pascal.png" type="image/png" sizes="32x32" />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-    <!-- ===== FONDO CON ESTRELLAS Y LUNA ===== -->
-    <div class="bg-container">
-        <div class="moon"></div>
-        <div id="stars"></div>
-        <div class="glow-spot glow-1"></div>
-        <div class="glow-spot glow-2"></div>
-    </div>
+<!-- FONDO -->
+<div class="bg-scene">
+    <div class="moon"></div>
+    <div class="glow-blob gb1"></div>
+    <div class="glow-blob gb2"></div>
+    <div class="glow-blob gb3"></div>
+    <div id="stars"></div>
+</div>
 
-    <!-- ===== BOTÓN DE MÚSICA ===== -->
-    <button class="music-btn" id="musicBtn">
-        <span class="music-icon">♫</span>
-    </button>
-    <audio id="bgMusic" loop>
-        <source src="music/cancion.mp3" type="audio/mpeg" />
-    </audio>
+<!-- MÚSICA -->
+<button class="music-btn" id="musicBtn"><span class="music-icon">♫</span></button>
+<audio id="bgMusic" loop><source src="music/cancion.mp3" type="audio/mpeg" /></audio>
 
-    <!-- ===== CONTENEDOR PRINCIPAL ===== -->
-    <div class="invitation-wrapper">
+<div class="invitation-wrapper">
 
-        <!-- ===== HERO ===== -->
-        <section class="card hero-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <img src="images/corona.png" alt="Corona" class="hero-crown float-icon" />
-            <span class="hero-sub">Mis</span>
-            <h1 class="hero-title">XV Años</h1>
-            <p class="hero-name">Antonella Luana</p>
-            <img src="images/rapunzel.png" alt="Rapunzel" class="hero-illustration float-slow" />
-            <div class="scroll-hint">✦ Desliza ✦</div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+    <!-- ===== HERO ===== -->
+    <section class="section hero-section">
+        <!-- Ramas decorativas -->
+        <img src="rama-seca.png"  class="deco-img deco-rama-seca"  alt="" />
+        <img src="rama-hojas.png" class="deco-img deco-rama-hojas" alt="" />
 
-        <!-- ===== MENSAJE ===== -->
-        <section class="card message-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <div class="message-grid">
+        <div class="card-inner">
+            <!-- Rapunzel de fondo translúcida -->
+            <img src="rapunzel-dorada.png" class="hero-rapunzel-bg float-gentle" alt="" />
+
+            <div class="hero-content">
+                <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+                <span class="hero-eyebrow">Mis</span>
+                <h1 class="hero-title">XV Años</h1>
+                <p class="hero-name">
+                    <span class="lantern-sparkle" style="animation-delay:.4s">🏮</span>
+                    Antonella Luana
+                    <span class="lantern-sparkle" style="animation-delay:1.2s">🏮</span>
+                </p>
+                <div class="divider-gold"></div>
+                <img src="rapunzel-pie.png" class="hero-rapunzel-main float-slow" alt="Rapunzel" />
+                <div class="scroll-hint">✦ &nbsp;DESLIZA&nbsp; ✦</div>
+                <div class="ornament ornament-bottom">✦ &nbsp; ✦ &nbsp; ✦</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MENSAJE ===== -->
+    <section class="section">
+        <img src="flores.png"     class="deco-img deco-flores-left"  alt="" />
+        <img src="flores.png"     class="deco-img deco-flores-right" alt="" />
+        <div class="card-inner">
+            <div class="ornament">❀ &nbsp; ✿ &nbsp; ❀</div>
+            <div class="message-layout">
                 <div class="message-text">
                     <p>Con la bendición de Dios y el amor que mi familia me ha dado, me siento feliz de llegar a este momento de mi vida.</p>
                     <p>El día que dejaré atrás mi infancia y comenzaré un nuevo viaje lleno de sueños y esperanzas.</p>
                     <p>Porque son parte de mi vida, es mi deseo que compartan conmigo la alegría de mis quince años.</p>
                 </div>
-                <div class="message-illustration">
-                    <img src="images/pascal.png" alt="Pascal" class="float-icon" />
+                <div>
+                    <img src="rapunzel-farolito.png" class="message-portrait" alt="" />
                 </div>
             </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+            <div class="ornament ornament-bottom">❀ &nbsp; ✿ &nbsp; ❀</div>
+        </div>
+    </section>
 
-        <!-- ===== PADRES ===== -->
-        <section class="card parents-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <div class="parents-content">
-                <div class="parents-names">
-                    Elena Meza <span class="and">✦</span> Juan Casas
-                </div>
-                <p class="parents-invite">Tienen el honor de invitarlos a festejar los XV años de su hija</p>
-                <div class="name-gold">Antonella Luana</div>
+    <!-- ===== PADRES ===== -->
+    <section class="section parents-section">
+        <img src="trenza-flores.png" class="deco-img deco-trenza" alt="" />
+        <div class="card-inner">
+            <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+            <div class="parents-names">
+                Elena Meza <span class="parents-sep">✦</span> Juan Casas
             </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
-
-        <!-- ===== CONTADOR ===== -->
-        <section class="card countdown-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <h2 class="section-title">Faltan</h2>
-            <div class="countdown-grid" id="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Días</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Horas</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Minutos</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Segundos</span>
-                </div>
+            <p class="parents-invite">Tienen el honor de invitarlos a festejar los XV años de su hija</p>
+            <div class="divider-gold"></div>
+            <div class="name-frame">
+                <span class="name-frame-text">Antonella Luana</span>
             </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+            <div class="ornament ornament-bottom">✦ &nbsp; ✦ &nbsp; ✦</div>
+        </div>
+    </section>
 
-        <!-- ===== FECHA Y LUGAR ===== -->
-        <section class="card date-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <div class="date-location-grid">
+    <!-- ===== COUNTDOWN ===== -->
+    <section class="section countdown-section">
+        <div class="card-inner">
+            <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+            <h2 class="section-title">TAN SOLO FALTAN</h2>
+            <div class="countdown-row" id="countdown">
+                <div class="cd-box"><span class="cd-num" id="days">00</span><span class="cd-lbl">Días</span></div>
+                <div class="cd-box"><span class="cd-num" id="hours">00</span><span class="cd-lbl">Horas</span></div>
+                <div class="cd-box"><span class="cd-num" id="minutes">00</span><span class="cd-lbl">Minutos</span></div>
+                <div class="cd-box"><span class="cd-num" id="seconds">00</span><span class="cd-lbl">Segundos</span></div>
+            </div>
+            <div class="ornament ornament-bottom">✦ &nbsp; ✦ &nbsp; ✦</div>
+        </div>
+    </section>
+
+    <!-- ===== FECHA Y LUGAR ===== -->
+    <section class="section">
+        <img src="rama-seca.png"  class="deco-img deco-rama-seca"  alt="" style="opacity:.5" />
+        <div class="card-inner">
+            <div class="ornament">❀ &nbsp; ✿ &nbsp; ❀</div>
+            <div class="date-grid">
                 <div class="date-box">
                     <div class="date-month">JULIO</div>
                     <div class="date-day">17</div>
@@ -106,133 +116,122 @@
                     <div class="date-weekday">SÁBADO</div>
                 </div>
                 <div class="location-box">
-                    <h3 class="location-title">Recepción</h3>
-                    <div class="location-detail">🕐 8:00 pm</div>
-                    <div class="location-detail">📍 Calle Diseñarte, Lima</div>
+                    <div class="location-title">Recepción</div>
+                    <div class="location-detail"><span class="location-icon">🕐</span> 8:00 pm</div>
+                    <div class="location-detail"><span class="location-icon">📍</span> Calle Diseñarte, Lima</div>
                     <a href="#" class="btn-map">▸ Cómo Llegar</a>
                 </div>
             </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+            <div class="ornament ornament-bottom">❀ &nbsp; ✿ &nbsp; ❀</div>
+        </div>
+    </section>
 
-        <!-- ===== VESTIMENTA (rediseñada completamente) ===== -->
-        <section class="card dresscode-card">
-            <div class="deco-top">❀ ✿ ❀</div>
+    <!-- ===== VESTIMENTA ===== -->
+    <section class="section dresscode-section">
+        <img src="flores.png" class="deco-img deco-flores-left" alt="" style="opacity:.7" />
+        <div class="card-inner">
+            <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
             <h2 class="section-title">Código de Vestimenta</h2>
-            <div class="dresscode-grid">
-                <div class="dresscode-item">
-                    <span class="dresscode-icon">👔</span>
-                    <h4>Formal</h4>
-                    <p class="dresscode-desc">Traje de gala</p>
+            <div class="dresscode-row">
+                <div class="dc-item">
+                    <span class="dc-icon">👔</span>
+                    <div class="dc-title">Formal</div>
+                    <div class="dc-sub">Traje de gala</div>
                 </div>
-                <div class="dresscode-item">
-                    <span class="dresscode-icon">👗</span>
-                    <h4>Elegante</h4>
-                    <p class="dresscode-desc">Vestido de noche</p>
+                <div class="dc-item">
+                    <span class="dc-icon">👗</span>
+                    <div class="dc-title">Elegante</div>
+                    <div class="dc-sub">Vestido de noche</div>
                 </div>
             </div>
             <div class="dresscode-note">
                 <p>Se reserva el color morado</p>
                 <strong>¡Déjame el color de la Quinceañera!</strong>
             </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+            <div class="ornament ornament-bottom">✦ &nbsp; ✦ &nbsp; ✦</div>
+        </div>
+    </section>
 
-        <!-- ===== REGALOS ===== -->
-        <section class="card gift-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <div class="gift-box">
-                <span class="gift-icon float-icon">✧</span>
-                <p class="gift-text">Tu presencia es el mejor regalo.<br />Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.</p>
-            </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+    <!-- ===== REGALO ===== -->
+    <section class="section gift-section">
+        <img src="trenza-flores.png" class="deco-img deco-trenza" alt="" style="opacity:.65" />
+        <div class="card-inner">
+            <div class="ornament">❀ &nbsp; ✿ &nbsp; ❀</div>
+            <span class="gift-icon">✧</span>
+            <p class="gift-text">
+                Tu presencia es el mejor regalo.<br />
+                Si algo me deseas obsequiar, un regalo en sobre lo sabré apreciar.
+            </p>
+            <div class="ornament ornament-bottom">❀ &nbsp; ✿ &nbsp; ❀</div>
+        </div>
+    </section>
 
-        <!-- ===== RSVP ===== -->
-        <section class="card rsvp-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <div class="rsvp-box">
-                <p class="rsvp-text">Te agradecemos que confirmes tu asistencia al siguiente WhatsApp</p>
-                <a href="#" class="btn-whatsapp">✦ Confirmar por WhatsApp</a>
-            </div>
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+    <!-- ===== RSVP ===== -->
+    <section class="section rsvp-section">
+        <div class="card-inner">
+            <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+            <p class="rsvp-text">Te agradecemos que confirmes tu asistencia al siguiente WhatsApp</p>
+            <a href="#" class="btn-whatsapp">✦ &nbsp;Confirmar por WhatsApp</a>
+            <div class="ornament ornament-bottom">✦ &nbsp; ✦ &nbsp; ✦</div>
+        </div>
+    </section>
 
-        <!-- ===== CIERRE ===== -->
-        <section class="card closing-card">
-            <div class="deco-top">❀ ✿ ❀</div>
-            <h2 class="closing-title">¡Te Esperamos!</h2>
-            <img src="images/rapunzel.png" alt="Rapunzel" class="closing-illustration float-slow" />
-            <div class="deco-bottom">❀ ✿ ❀</div>
-        </section>
+    <!-- ===== CIERRE ===== -->
+    <section class="section closing-section">
+        <img src="flores.png"     class="deco-img deco-flores-left"  alt="" />
+        <img src="flores.png"     class="deco-img deco-flores-right" alt="" />
+        <div class="card-inner">
+            <div class="ornament">❀ &nbsp; ✿ &nbsp; ❀</div>
+            <span class="closing-title">¡Te Esperamos!</span>
+            <img src="rapunzel-pie.png" class="closing-rapunzel" alt="Rapunzel" />
+            <div class="ornament ornament-bottom">❀ &nbsp; ✿ &nbsp; ❀</div>
+        </div>
+    </section>
 
-        <!-- ===== FOOTER ===== -->
-        <footer class="footer">
-            Hecho con 💜 para Antonella Luana · 2026
-        </footer>
+    <footer class="footer">Hecho con 💜 para Antonella Luana · 2026</footer>
 
-    </div>
+</div><!-- /invitation-wrapper -->
 
-    <script>
-        // ===== ESTRELLAS =====
-        (function() {
-            const container = document.getElementById('stars');
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 2.5 + 1;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = (Math.random() * 5) + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                container.appendChild(star);
-            }
-        })();
+<script>
+// ESTRELLAS
+(function(){
+    const c=document.getElementById('stars');
+    for(let i=0;i<180;i++){
+        const s=document.createElement('div');
+        s.className='star';
+        const sz=Math.random()*2.5+.8;
+        s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*6}s;animation-duration:${Math.random()*3+2}s`;
+        c.appendChild(s);
+    }
+})();
 
-        // ===== MÚSICA =====
-        (function() {
-            const audio = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            let isPlaying = false;
-            btn.addEventListener('click', function() {
-                if (isPlaying) {
-                    audio.pause();
-                    btn.classList.remove('playing');
-                    btn.querySelector('.music-icon').textContent = '♫';
-                } else {
-                    audio.play().catch(() => {});
-                    btn.classList.add('playing');
-                    btn.querySelector('.music-icon').textContent = '♪';
-                }
-                isPlaying = !isPlaying;
-            });
-        })();
+// MÚSICA
+(function(){
+    const audio=document.getElementById('bgMusic');
+    const btn=document.getElementById('musicBtn');
+    let playing=false;
+    btn.addEventListener('click',function(){
+        if(playing){audio.pause();btn.classList.remove('playing');btn.querySelector('.music-icon').textContent='♫';}
+        else{audio.play().catch(()=>{});btn.classList.add('playing');btn.querySelector('.music-icon').textContent='♪';}
+        playing=!playing;
+    });
+})();
 
-        // ===== CONTADOR =====
-        (function() {
-            const target = new Date('2026-07-17T20:00:00').getTime();
-            const d = document.getElementById('days');
-            const h = document.getElementById('hours');
-            const m = document.getElementById('minutes');
-            const s = document.getElementById('seconds');
-            function update() {
-                const now = Date.now();
-                let diff = target - now;
-                if (diff < 0) diff = 0;
-                const days = Math.floor(diff / 86400000);
-                const hours = Math.floor((diff % 86400000) / 3600000);
-                const minutes = Math.floor((diff % 3600000) / 60000);
-                const seconds = Math.floor((diff % 60000) / 1000);
-                d.textContent = String(days).padStart(2, '0');
-                h.textContent = String(hours).padStart(2, '0');
-                m.textContent = String(minutes).padStart(2, '0');
-                s.textContent = String(seconds).padStart(2, '0');
-            }
-            update();
-            setInterval(update, 1000);
-        })();
-    </script>
+// COUNTDOWN
+(function(){
+    const target=new Date('2026-07-17T20:00:00').getTime();
+    const els={d:document.getElementById('days'),h:document.getElementById('hours'),m:document.getElementById('minutes'),s:document.getElementById('seconds')};
+    function pad(n){return String(n).padStart(2,'0');}
+    function update(){
+        let diff=target-Date.now();
+        if(diff<0)diff=0;
+        els.d.textContent=pad(Math.floor(diff/86400000));
+        els.h.textContent=pad(Math.floor(diff%86400000/3600000));
+        els.m.textContent=pad(Math.floor(diff%3600000/60000));
+        els.s.textContent=pad(Math.floor(diff%60000/1000));
+    }
+    update();setInterval(update,1000);
+})();
+</script>
 </body>
 </html>
