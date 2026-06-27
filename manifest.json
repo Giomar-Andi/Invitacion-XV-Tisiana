@@ -1,15 +1,14 @@
 {
     "name": "Mis XV Años - Antonella Luana",
     "short_name": "XV Antonella",
-    "description": "Invitación de XV Años con temática de Rapunzel - Sábado 17 de Julio 2026",
+    "description": "Invitación de XV Años - Sábado 17 de Julio 2026",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#E8DFF5",
+    "background_color": "#F0E6F5",
     "theme_color": "#C8B8E8",
     "orientation": "portrait",
     "scope": "/",
     "lang": "es",
-    "dir": "ltr",
     "icons": [
         {
             "src": "images/corona-192.png",
@@ -22,14 +21,6 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
-        }
-    ],
-    "categories": ["lifestyle", "entertainment"],
-    "screenshots": [
-        {
-            "src": "images/screenshot1.png",
-            "sizes": "1080x1920",
-            "type": "image/png"
         }
     ]
 }
