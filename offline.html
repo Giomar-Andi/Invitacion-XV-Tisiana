@@ -3,75 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sin Conexión - XV Años Antonella</title>
+    <meta name="theme-color" content="#C8B8E8">
+    <title>Sin Conexión · XV Antonella</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* ============================================
+           VARIABLES - MISMA PALETA
+           ============================================ */
+        :root {
+            --lila-claro: #F3EAF8;
+            --lila-medio: #E6D5F0;
+            --lila-principal: #D4BCE8;
+            --morado-suave: #B8A5D4;
+            --morado-medio: #9B7CB6;
+            --morado-oscuro: #6B4E71;
+            --morado-profundo: #4A2C5E;
+            
+            --dorado: #D4AF37;
+            --dorado-claro: #FFD700;
+            --dorado-oscuro: #B8941F;
+            
+            --blanco: #FFFFFF;
+            --blanco-crema: #FFFBF5;
+            
+            --font-elegante: 'Great Vibes', cursive;
+            --font-titulos: 'Playfair Display', serif;
+            --font-cuerpo: 'Inter', sans-serif;
+            
+            --shadow-glass: 0 8px 32px rgba(74, 44, 94, 0.15);
+            --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.35);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #E8DFF5 0%, #D4C4E8 100%);
+            font-family: var(--font-cuerpo);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 1.5rem;
+            background: linear-gradient(145deg, var(--lila-claro) 0%, var(--morado-suave) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           FONDO CON DESTELLOS (igual que en la invitación)
+           ============================================ */
+        .bg-sparkles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, var(--dorado-claro), transparent 70%);
+            border-radius: 50%;
+            animation: sparkle 4s ease-in-out infinite;
+        }
+        .sparkle:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 12%; animation-delay: 1.4s; }
+        .sparkle:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 2.8s; }
+        .sparkle:nth-child(4) { bottom: 35%; right: 8%; animation-delay: 0.7s; }
+        .sparkle:nth-child(5) { top: 55%; left: 5%; animation-delay: 2.1s; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.6); }
+            50% { opacity: 1; transform: scale(1.8); }
+        }
+
+        /* ============================================
+           TARJETA PRINCIPAL (GLASSMORPHISM)
+           ============================================ */
+        .offline-card {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            width: 100%;
+            padding: 3rem 2.5rem;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 32px;
+            box-shadow: var(--shadow-glass);
             text-align: center;
-            padding: 20px;
+            animation: float-card 6s ease-in-out infinite;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-        
-        .offline-container {
-            max-width: 500px;
+        .offline-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(74, 44, 94, 0.25);
         }
-        
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* ============================================
+           CONTENIDO
+           ============================================ */
         .offline-icon {
-            font-size: 5rem;
-            margin-bottom: 20px;
+            font-size: 4.5rem;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            animation: pulse-icon 2.5s ease-in-out infinite;
         }
-        
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: #6B4E71;
-            margin-bottom: 20px;
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(-6deg); }
         }
-        
-        p {
-            color: #4A2C5E;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
+
+        .offline-title {
+            font-family: var(--font-elegante);
+            font-size: clamp(2.8rem, 8vw, 4rem);
+            color: var(--morado-profundo);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(74, 44, 94, 0.15);
         }
-        
+
+        .offline-sub {
+            font-family: var(--font-titulos);
+            font-size: 0.95rem;
+            color: var(--morado-oscuro);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .offline-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--dorado), var(--dorado-claro));
+            margin: 0 auto 1.8rem;
+            border-radius: 4px;
+        }
+
+        .offline-message {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--morado-profundo);
+            margin-bottom: 2.2rem;
+        }
+        .offline-message strong {
+            color: var(--dorado);
+            font-weight: 600;
+        }
+
+        .offline-note {
+            font-size: 0.9rem;
+            color: var(--morado-medio);
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* ============================================
+           BOTÓN
+           ============================================ */
         .btn-retry {
-            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: linear-gradient(135deg, var(--dorado), var(--dorado-claro));
+            color: var(--blanco);
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
             text-decoration: none;
             font-weight: 600;
-            display: inline-block;
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
-            transition: transform 0.3s ease;
+            font-size: 1.05rem;
+            box-shadow: var(--shadow-gold);
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-cuerpo);
         }
-        
         .btn-retry:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 16px 50px rgba(212, 175, 55, 0.5);
+        }
+        .btn-retry:active {
+            transform: scale(0.96);
+        }
+
+        /* ============================================
+           DECORACIÓN CON FLORES (opcional, sutil)
+           ============================================ */
+        .deco-flower {
+            position: fixed;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 6rem;
+        }
+        .deco-flower--left {
+            bottom: 5%;
+            left: 3%;
+            transform: rotate(-20deg);
+        }
+        .deco-flower--right {
+            top: 5%;
+            right: 3%;
+            transform: rotate(25deg);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 600px) {
+            .offline-card {
+                padding: 2rem 1.5rem;
+            }
+            .offline-icon {
+                font-size: 3.5rem;
+            }
+            .offline-message {
+                font-size: 0.95rem;
+            }
+            .btn-retry {
+                width: 100%;
+                justify-content: center;
+                padding: 0.9rem 1.5rem;
+            }
+            .deco-flower {
+                display: none;
+            }
+            .offline-note {
+                font-size: 0.8rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .offline-card {
+                padding: 1.5rem 1rem;
+            }
+            .offline-title {
+                font-size: 2.4rem;
+            }
+            .offline-sub {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ============================================
+           UTILITARIO - ACCESIBILIDAD
+           ============================================ */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="offline-container">
-        <div class="offline-icon">📴</div>
-        <h1>Sin Conexión</h1>
-        <p>
-            Parece que no tienes conexión a internet.<br>
-            La invitación ya fue cargada y puedes verla sin conexión.
-        </p>
-        <a href="/" class="btn-retry">Intentar de Nuevo</a>
+
+    <!-- DESTELLOS DE FONDO -->
+    <div class="bg-sparkles" aria-hidden="true">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
     </div>
+
+    <!-- DECORACIONES FLORALES SUTILES -->
+    <div class="deco-flower deco-flower--left" aria-hidden="true">🌸</div>
+    <div class="deco-flower deco-flower--right" aria-hidden="true">🌷</div>
+
+    <!-- TARJETA PRINCIPAL -->
+    <main class="offline-card" role="main" aria-labelledby="offline-title">
+        <div class="offline-icon" aria-hidden="true">📴</div>
+        <h1 class="offline-title" id="offline-title">Sin Conexión</h1>
+        <p class="offline-sub">✦ Modo offline ✦</p>
+        <div class="offline-divider" aria-hidden="true"></div>
+
+        <p class="offline-message">
+            Parece que no tienes conexión a internet.<br>
+            Pero no te preocupes, <strong>la invitación ya está cargada</strong><br>
+            y puedes disfrutarla sin conexión.
+        </p>
+
+        <span class="offline-note" aria-hidden="true">✨ Todo listo para ti ✨</span>
+
+        <a href="/" class="btn-retry" role="button">
+            <span>🔄</span> Intentar de Nuevo
+        </a>
+    </main>
+
+    <!-- FOOTER SUTIL (opcional) -->
+    <footer style="position: fixed; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 0.7rem; color: var(--morado-medio); opacity: 0.5; z-index: 1; pointer-events: none;">
+        Antonella Luana · XV Años
+    </footer>
 </body>
 </html>
