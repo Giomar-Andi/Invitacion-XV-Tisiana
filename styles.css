@@ -9,8 +9,6 @@
     --gold-glow:  rgba(200,150,20,.4);
     --lila-deep:  #5a2d9a;
     --lila-mid:   #8b5fc0;
-    --lila-soft:  rgba(180,140,230,.22);
-    --lila-card:  rgba(195,160,240,.28);
     --text-dark:  #2e1a55;
     --text-mid:   #5a3a85;
     --text-soft:  #8a6aaa;
@@ -26,50 +24,36 @@ body {
 }
 
 /* ============================================================
-   FONDO — paisaje atardecer/noche lila con luna
+   FONDO GLOBAL — paisaje atardecer lila con luna
    ============================================================ */
 .bg-scene {
     position: fixed;
     inset: 0;
     z-index: 0;
-    /* Cielo degradado: de lila claro arriba a lavanda rosado abajo */
-    background:
-        linear-gradient(180deg,
-            #c8a8e8 0%,
-            #d8baf5 18%,
-            #e8d0ff 35%,
-            #f0e4ff 55%,
-            #f8eeff 75%,
-            #fff0f8 100%
-        );
+    background: linear-gradient(180deg,
+        #c8a8e8 0%, #d8baf5 18%, #e8d0ff 35%,
+        #f0e4ff 55%, #f8eeff 75%, #fff0f8 100%);
     overflow: hidden;
 }
-
-/* Nubes/neblina de atardecer */
 .bg-scene::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 40% at 30% 70%, rgba(255,200,230,.35) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 30% at 75% 60%, rgba(220,170,255,.3) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 25% at 15% 45%, rgba(200,150,255,.2) 0%, transparent 70%);
+        radial-gradient(ellipse 80% 40% at 30% 70%, rgba(255,200,230,.3) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 30% at 75% 55%, rgba(220,170,255,.25) 0%, transparent 70%);
 }
-
-/* Chispeaditos dorados/lilas (estrellas suaves) */
 .bg-scene::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-        radial-gradient(circle, rgba(212,175,55,.25) 1px, transparent 1px),
-        radial-gradient(circle, rgba(180,120,240,.18) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,200,220,.2) 1px, transparent 1px);
-    background-size: 70px 70px, 110px 110px, 90px 90px;
-    background-position: 5px 5px, 55px 30px, 25px 60px;
+        radial-gradient(circle, rgba(212,175,55,.2) 1px, transparent 1px),
+        radial-gradient(circle, rgba(180,120,240,.15) 1px, transparent 1px);
+    background-size: 70px 70px, 110px 110px;
+    background-position: 5px 5px, 55px 30px;
 }
 
-/* LUNA — romántica, arriba derecha */
 .moon {
     position: absolute;
     top: 4%; right: 6%;
@@ -77,13 +61,11 @@ body {
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #fff8d0, #f8e060, #e8c830);
     box-shadow:
-        0 0 0 8px rgba(255,240,100,.12),
-        0 0 0 18px rgba(255,230,80,.07),
+        0 0 0 10px rgba(255,240,100,.1),
         0 0 60px rgba(255,220,60,.5),
         0 0 140px rgba(255,200,40,.2);
     animation: moonGlow 6s ease-in-out infinite alternate;
 }
-/* Crateritos sutiles */
 .moon::before {
     content: '';
     position: absolute;
@@ -91,14 +73,13 @@ body {
     border-radius: 50%;
     background: rgba(200,170,20,.15);
     top: 22%; left: 30%;
-    box-shadow: 22px 18px 0 8px rgba(200,170,20,.1), -8px 28px 0 5px rgba(200,170,20,.08);
+    box-shadow: 22px 18px 0 8px rgba(200,170,20,.1);
 }
 @keyframes moonGlow {
     from { box-shadow: 0 0 0 8px rgba(255,240,100,.1), 0 0 55px rgba(255,220,60,.4), 0 0 110px rgba(255,200,40,.15); }
-    to   { box-shadow: 0 0 0 14px rgba(255,240,100,.18), 0 0 90px rgba(255,220,60,.7), 0 0 200px rgba(255,200,40,.3); }
+    to   { box-shadow: 0 0 0 16px rgba(255,240,100,.18), 0 0 90px rgba(255,220,60,.7), 0 0 200px rgba(255,200,40,.3); }
 }
 
-/* Colinas/silueta de paisaje en la base */
 .landscape {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -107,7 +88,6 @@ body {
 }
 .landscape svg { width: 100%; height: 100%; }
 
-/* Partículas flotantes */
 #stars { position: absolute; inset: 0; pointer-events: none; }
 .star {
     position: absolute;
@@ -138,7 +118,7 @@ body {
     transition: all .3s;
     box-shadow: 0 4px 18px rgba(120,60,200,.15);
 }
-.music-btn:hover { transform: scale(1.1); background: rgba(160,100,220,.28); }
+.music-btn:hover { transform: scale(1.1); }
 .music-btn.playing {
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     color: #fff;
@@ -162,30 +142,31 @@ body {
 }
 
 /* ============================================================
-   SECCIONES
+   SECCIÓN — contenedor relativo
    ============================================================ */
 .section {
     position: relative;
-    margin-bottom: 4.5rem;
+    margin-bottom: 5rem;
 }
 
-/* Card interior glass lila */
+/* ============================================================
+   CARD BOX — con fondo floral
+   ============================================================ */
 .card-box {
-    background: linear-gradient(160deg,
-        rgba(220,190,255,.48) 0%,
-        rgba(200,160,245,.42) 100%
-    );
-    border: 1.5px solid rgba(160,110,220,.28);
+    position: relative;
     border-radius: 28px;
+    border: 1.5px solid rgba(160,110,220,.3);
     padding: 3rem 2.8rem;
     box-shadow:
-        0 16px 55px rgba(120,60,200,.12),
-        inset 0 1px 0 rgba(255,255,255,.55);
-    position: relative;
-    z-index: 2;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    overflow: hidden; /* para que el bg de rapunzel no se salga */
+        0 16px 55px rgba(120,60,200,.13),
+        inset 0 1px 0 rgba(255,255,255,.6);
+    overflow: hidden; /* clave para que las imágenes de fondo no se salgan */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    /* fondo base lila translúcido */
+    background: linear-gradient(160deg,
+        rgba(225,200,255,.55) 0%,
+        rgba(205,168,248,.48) 100%);
 }
 
 /* Línea dorada shimmer superior */
@@ -193,104 +174,148 @@ body {
     content: '';
     position: absolute;
     top: 0; left: 8%; right: 8%;
-    height: 1.8px;
-    background: linear-gradient(90deg,
-        transparent, var(--gold), rgba(200,150,20,.4), var(--gold), transparent);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), rgba(200,150,20,.4), var(--gold), transparent);
     border-radius: 999px;
-    opacity: .7;
+    opacity: .75;
+    z-index: 5;
 }
 
 /* ============================================================
-   IMÁGENES DECORATIVAS — blend-mode para eliminar fondo blanco
-   Principio: multiply sobre fondo lila = el blanco desaparece
+   FONDO FLORAL DENTRO DE CADA CARD
+   — flores y hojas como fondo del bloque, que llena el espacio
    ============================================================ */
-
-/* Contenedor de imagen decorativa */
-.deco-img {
+.card-flora {
     position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0; /* detrás del contenido */
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+/* Flores esquina superior izquierda — grande, de fondo */
+.card-flora .cf-tl {
+    position: absolute;
+    top: -30px; left: -25px;
+    width: 55%;
+    max-width: 340px;
+    opacity: .18;
+    mix-blend-mode: multiply;
+    transform: rotate(-12deg);
+    filter: saturate(1.3);
+}
+/* Flores esquina inferior derecha — espejada */
+.card-flora .cf-br {
+    position: absolute;
+    bottom: -30px; right: -25px;
+    width: 55%;
+    max-width: 340px;
+    opacity: .18;
+    mix-blend-mode: multiply;
+    transform: scaleX(-1) scaleY(-1) rotate(-12deg);
+    filter: saturate(1.3);
+}
+/* Hojas esquina superior derecha */
+.card-flora .cf-tr {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 42%;
+    max-width: 260px;
+    opacity: .14;
+    mix-blend-mode: multiply;
+    transform: scaleX(-1) rotate(8deg);
+    filter: saturate(1.2);
+}
+/* Hojas esquina inferior izquierda */
+.card-flora .cf-bl {
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 42%;
+    max-width: 260px;
+    opacity: .14;
+    mix-blend-mode: multiply;
+    transform: rotate(8deg);
+    filter: saturate(1.2);
+}
+
+/* Contenido siempre por encima de la flora */
+.card-content-z {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================
+   RAMA ENVOLVIENDO EL BORDE SUPERIOR DE CADA SECCIÓN
+   — sale del borde del card, efecto de abrazo
+   ============================================================ */
+.rama-wrap {
+    position: absolute;
+    top: -42px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     pointer-events: none;
     z-index: 10;
-    /* MIX-BLEND-MODE: multiply hace que el fondo blanco sea transparente */
-    mix-blend-mode: multiply;
-    /* object-fit para no deformarse */
-    object-fit: contain;
+    padding: 0 10px;
 }
-
-/* --- FLORES --- */
-/* Esquina superior izquierda */
-.fl-tl {
-    width: 160px;
-    top: -38px; left: -32px;
-    transform: rotate(-8deg);
-    filter: drop-shadow(0 6px 16px rgba(120,60,160,.2));
-}
-/* Esquina superior derecha */
-.fl-tr {
-    width: 155px;
-    top: -36px; right: -30px;
+.rama-wrap .rama-l {
+    width: 200px;
     transform: scaleX(-1) rotate(-8deg);
-    filter: drop-shadow(0 6px 16px rgba(120,60,160,.2));
-}
-/* Esquina inferior izquierda */
-.fl-bl {
-    width: 150px;
-    bottom: -34px; left: -28px;
-    transform: rotate(10deg);
-    filter: drop-shadow(0 6px 16px rgba(120,60,160,.18));
-}
-/* Esquina inferior derecha */
-.fl-br {
-    width: 148px;
-    bottom: -34px; right: -28px;
-    transform: scaleX(-1) rotate(10deg);
-    filter: drop-shadow(0 6px 16px rgba(120,60,160,.18));
-}
-
-/* --- RAMA CON HOJAS (izquierda) --- */
-.rama-hojas-l {
-    width: 80px;
-    top: 50%; left: -40px;
-    transform: translateY(-50%) rotate(10deg);
+    transform-origin: right bottom;
     mix-blend-mode: multiply;
-    filter: drop-shadow(2px 4px 10px rgba(0,0,0,.12));
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,.12));
     opacity: .88;
 }
-/* --- RAMA SECA (derecha, espejada) --- */
-.rama-seca-r {
-    width: 75px;
-    top: 50%; right: -38px;
-    transform: translateY(-50%) scaleX(-1) rotate(10deg);
+.rama-wrap .rama-r {
+    width: 190px;
+    transform: rotate(8deg);
+    transform-origin: left bottom;
     mix-blend-mode: multiply;
-    filter: drop-shadow(-2px 4px 10px rgba(0,0,0,.1));
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,.1));
     opacity: .82;
 }
 
-/* --- FAROLITOS --- */
-.farolito {
+/* ============================================================
+   FAROL — esquina superior izquierda del card, grande
+   Da sensación de alumbrar con glow
+   ============================================================ */
+.farol-card {
     position: absolute;
-    pointer-events: none;
+    top: -28px;
+    left: 20px;
+    width: 90px;
     z-index: 11;
     mix-blend-mode: multiply;
-    filter: drop-shadow(0 4px 12px rgba(212,175,55,.5));
+    filter:
+        drop-shadow(0 0 18px rgba(255,180,50,.7))
+        drop-shadow(0 0 35px rgba(255,150,30,.4));
+    animation: farolFloat 5s ease-in-out infinite;
 }
-.far-tl { width: 52px; top: 14px; left: 18px; animation: floatG 5s ease-in-out infinite; }
-.far-tr { width: 48px; top: 14px; right: 18px; animation: floatG 5s ease-in-out infinite; animation-delay: 1.4s; }
-.far-bl { width: 46px; bottom: 14px; left: 20px; animation: floatG 6s ease-in-out infinite; animation-delay: .7s; }
-.far-br { width: 44px; bottom: 14px; right: 20px; animation: floatG 6s ease-in-out infinite; animation-delay: 2.1s; }
+@keyframes farolFloat {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-12px) rotate(3deg); }
+}
 
-/* --- TRENZA --- */
-.trenza-acc {
+/* Halo de luz del farol sobre el card */
+.farol-glow {
     position: absolute;
-    width: 85px;
-    top: -28px; right: -14px;
-    z-index: 11;
-    mix-blend-mode: multiply;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,.1));
-    opacity: .88;
+    top: 20px; left: 20px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,200,80,.22) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9;
+    animation: glowPulse 5s ease-in-out infinite;
+}
+@keyframes glowPulse {
+    0%,100% { opacity: .6; transform: scale(1); }
+    50%      { opacity: 1;  transform: scale(1.15); }
 }
 
 /* ============================================================
-   ANIMACIONES
+   ANIMACIONES GENERALES
    ============================================================ */
 .float-gentle { animation: floatG 7s ease-in-out infinite; }
 @keyframes floatG {
@@ -328,23 +353,24 @@ body {
    HERO
    ============================================================ */
 .hero-card { text-align: center; }
+
 .hero-crown {
-    width: 82px;
+    width: 110px; /* más grande */
     display: block;
-    margin: 0 auto .4rem;
-    filter: drop-shadow(0 6px 20px rgba(200,150,20,.5));
+    margin: 0 auto .5rem;
+    filter: drop-shadow(0 8px 28px rgba(200,150,20,.55));
     mix-blend-mode: multiply;
 }
+
 .hero-eyebrow {
     font-family: 'Great Vibes', cursive;
     font-size: 2.8rem;
     color: var(--lila-deep);
     display: block;
-    letter-spacing: 2px;
 }
 .hero-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(3.8rem, 10vw, 7rem);
+    font-size: clamp(3.8rem,10vw,7rem);
     font-weight: 900;
     color: var(--gold);
     line-height: 1;
@@ -354,7 +380,7 @@ body {
 }
 .hero-name {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem,5vw,3.5rem);
     color: var(--text-dark);
     display: flex;
     align-items: center;
@@ -364,19 +390,18 @@ body {
 }
 .lantern-inline {
     width: 40px;
-    height: auto;
     mix-blend-mode: multiply;
     filter: drop-shadow(0 2px 8px rgba(212,175,55,.45));
-    display: inline-block;
     animation: floatG 5s ease-in-out infinite;
 }
 .lantern-inline:last-child { animation-delay: 1.3s; }
+
 .hero-rapunzel {
-    width: min(230px, 56%);
+    width: min(230px,56%);
     display: block;
     margin: 2rem auto .5rem;
-    filter: drop-shadow(0 12px 32px rgba(100,50,180,.18));
     mix-blend-mode: multiply;
+    filter: drop-shadow(0 12px 32px rgba(100,50,180,.18));
 }
 .scroll-hint {
     font-family: 'Cinzel', serif;
@@ -408,14 +433,11 @@ body {
     color: var(--text-mid);
     margin-bottom: .9rem;
 }
-.message-text p.highlight {
-    color: var(--lila-deep);
-    font-weight: 600;
-}
+.message-text p.highlight { color: var(--lila-deep); font-weight: 600; }
 .pascal-img {
     width: 130px;
-    filter: drop-shadow(0 8px 22px rgba(100,50,180,.15));
     mix-blend-mode: multiply;
+    filter: drop-shadow(0 8px 22px rgba(100,50,180,.15));
 }
 
 /* ============================================================
@@ -431,32 +453,21 @@ body {
 }
 .parents-names {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-size: clamp(1.4rem,3vw,2.1rem);
     font-weight: 700;
     color: var(--text-dark);
 }
-.parents-sep {
-    color: var(--gold);
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
-    margin: 0 .5rem;
-}
-.parents-sub {
-    font-size: 1rem;
-    color: var(--text-soft);
-    font-style: italic;
-    margin: 1rem 0;
-}
+.parents-sep { color: var(--gold); font-family: 'Great Vibes', cursive; font-size: 1.8rem; margin: 0 .5rem; }
+.parents-sub { font-size: 1rem; color: var(--text-soft); font-style: italic; margin: 1rem 0; }
 .name-plate {
     display: inline-block;
     border-top: 1.5px solid rgba(180,130,30,.45);
     border-bottom: 1.5px solid rgba(180,130,30,.45);
     padding: .8rem 2rem;
-    margin-top: .2rem;
 }
 .name-plate span {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    font-size: clamp(2.8rem,5.5vw,4.5rem);
     color: var(--gold);
     text-shadow: 0 3px 18px rgba(200,150,20,.28);
 }
@@ -466,7 +477,7 @@ body {
    ============================================================ */
 .section-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-size: clamp(1.3rem,2.5vw,1.9rem);
     color: var(--lila-deep);
     letter-spacing: 4px;
     text-align: center;
@@ -488,14 +499,11 @@ body {
     box-shadow: 0 4px 16px rgba(120,60,200,.08);
     transition: transform .3s, box-shadow .3s;
 }
-.cd-item:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 12px 30px rgba(120,60,200,.15);
-}
+.cd-item:hover { transform: translateY(-7px); box-shadow: 0 12px 30px rgba(120,60,200,.15); }
 .cd-num {
     display: block;
     font-family: 'Cinzel', serif;
-    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-size: clamp(2.2rem,4.5vw,3.4rem);
     font-weight: 700;
     color: var(--lila-deep);
     line-height: 1;
@@ -512,12 +520,7 @@ body {
 /* ============================================================
    FECHA Y LUGAR
    ============================================================ */
-.date-location {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 1.5rem;
-    align-items: stretch;
-}
+.date-location { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; align-items: stretch; }
 .date-box {
     background: rgba(255,255,255,.52);
     border: 1.5px solid rgba(160,100,220,.2);
@@ -526,76 +529,32 @@ body {
     text-align: center;
     box-shadow: 0 4px 16px rgba(120,60,200,.08);
 }
-.date-month {
-    font-family: 'Cinzel', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 6px;
-    color: var(--text-dark);
-}
-.date-day {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(4rem,9vw,6.5rem);
-    font-weight: 900;
-    color: var(--lila-deep);
-    line-height: 1;
-    text-shadow: 0 4px 28px rgba(100,50,180,.18);
-}
-.date-year {
-    font-family: 'Cinzel', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: var(--text-dark);
-}
-.date-weekday {
-    font-family: 'Cinzel', serif;
-    font-size: .82rem;
-    letter-spacing: 3px;
-    color: var(--text-soft);
-    margin-top: .3rem;
-}
+.date-month { font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 700; letter-spacing: 6px; color: var(--text-dark); }
+.date-day { font-family: 'Cinzel', serif; font-size: clamp(4rem,9vw,6.5rem); font-weight: 900; color: var(--lila-deep); line-height: 1; text-shadow: 0 4px 28px rgba(100,50,180,.18); }
+.date-year { font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 700; letter-spacing: 4px; color: var(--text-dark); }
+.date-weekday { font-family: 'Cinzel', serif; font-size: .82rem; letter-spacing: 3px; color: var(--text-soft); margin-top: .3rem; }
 .location-box {
     background: rgba(255,255,255,.52);
     border: 1px solid rgba(160,100,220,.16);
     border-radius: 22px;
     padding: 2rem 1.3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: .8rem;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: .8rem;
     text-align: center;
     box-shadow: 0 4px 16px rgba(120,60,200,.07);
 }
-.location-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.3rem;
-    color: var(--text-dark);
-}
-.location-detail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .6rem;
-    font-size: .94rem;
-    color: var(--text-mid);
-}
+.location-title { font-family: 'Great Vibes', cursive; font-size: 2.3rem; color: var(--text-dark); }
+.location-detail { display: flex; align-items: center; justify-content: center; gap: .6rem; font-size: .94rem; color: var(--text-mid); }
 .btn-gold {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #c9920a, #f0c84a);
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg,#c9920a,#f0c84a);
     color: #fff;
     padding: .76rem 1.7rem;
     border-radius: 60px;
     text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: .78rem;
-    letter-spacing: 1.5px;
+    font-family: 'Cinzel', serif; font-weight: 700; font-size: .78rem; letter-spacing: 1.5px;
     box-shadow: 0 6px 20px rgba(200,150,20,.32);
-    transition: all .3s;
-    margin-top: .2rem;
+    transition: all .3s; margin-top: .2rem;
 }
 .btn-gold:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(200,150,20,.52); }
 
@@ -603,169 +562,127 @@ body {
    VESTIMENTA
    ============================================================ */
 .dresscode-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    max-width: 440px;
-    margin: 0 auto 1.6rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; max-width: 440px; margin: 0 auto 1.6rem;
 }
 .dc-item {
     background: rgba(255,255,255,.52);
     border: 1.5px solid rgba(160,100,220,.18);
-    border-radius: 20px;
-    padding: 1.8rem .8rem;
+    border-radius: 20px; padding: 1.5rem .8rem;
     text-align: center;
     transition: all .35s;
     box-shadow: 0 4px 14px rgba(120,60,200,.07);
 }
-.dc-item:hover {
-    transform: translateY(-7px);
-    border-color: rgba(160,100,220,.4);
-    box-shadow: 0 12px 30px rgba(120,60,200,.13);
-}
-.dc-icon { font-size: 2.8rem; display: block; margin-bottom: .4rem; }
-
-/* Foto real en dresscode */
+.dc-item:hover { transform: translateY(-7px); border-color: rgba(160,100,220,.4); box-shadow: 0 12px 30px rgba(120,60,200,.13); }
 .dc-photo {
-    width: 130px;
-    height: 160px;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-    margin: 0 auto .8rem;
+    width: 130px; height: 165px;
+    object-fit: cover; object-position: top;
+    display: block; margin: 0 auto .8rem;
     border-radius: 14px;
     mix-blend-mode: multiply;
     filter: drop-shadow(0 6px 18px rgba(100,50,180,.18));
     transition: transform .35s ease;
 }
-.dc-item:hover .dc-photo {
-    transform: scale(1.05) translateY(-4px);
-}
-.dc-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    color: var(--text-dark);
-    letter-spacing: 2px;
-}
+.dc-item:hover .dc-photo { transform: scale(1.05) translateY(-4px); }
+.dc-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--text-dark); letter-spacing: 2px; }
 .dc-sub { font-size: .74rem; color: var(--text-soft); margin-top: .18rem; }
 .dresscode-note {
     background: rgba(255,255,255,.45);
     border: 1px solid rgba(180,130,30,.28);
     border-radius: 60px;
     padding: 1.1rem 1.8rem;
-    max-width: 440px;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 440px; margin: 0 auto; text-align: center;
 }
 .dresscode-note p { font-size: .9rem; color: var(--text-mid); margin-bottom: .18rem; }
-.dresscode-note strong {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
-    color: var(--gold);
-    display: block;
-}
+.dresscode-note strong { font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--gold); display: block; }
 
 /* ============================================================
    REGALO
    ============================================================ */
 .gift-star {
-    font-size: 3.2rem;
-    color: var(--gold);
-    display: block;
-    margin-bottom: .9rem;
+    font-size: 3.2rem; color: var(--gold);
+    display: block; margin-bottom: .9rem;
     filter: drop-shadow(0 3px 10px rgba(200,150,20,.32));
     animation: floatG 6s ease-in-out infinite;
 }
 .gift-text {
-    font-family: 'Lora', serif;
-    font-size: 1.04rem;
-    line-height: 2.1;
-    color: var(--text-mid);
-    max-width: 420px;
-    margin: 0 auto;
-    font-style: italic;
-    text-align: center;
+    font-family: 'Lora', serif; font-size: 1.04rem;
+    line-height: 2.1; color: var(--text-mid);
+    max-width: 420px; margin: 0 auto;
+    font-style: italic; text-align: center;
 }
 
 /* ============================================================
    RSVP
    ============================================================ */
 .rsvp-text {
-    font-family: 'Lora', serif;
-    font-size: 1.02rem;
-    line-height: 1.9;
-    color: var(--text-mid);
-    margin-bottom: 1.6rem;
-    font-style: italic;
-    text-align: center;
+    font-family: 'Lora', serif; font-size: 1.02rem;
+    line-height: 1.9; color: var(--text-mid);
+    margin-bottom: 1.6rem; font-style: italic; text-align: center;
 }
 .btn-whatsapp {
-    display: inline-flex;
-    align-items: center;
-    gap: .6rem;
-    background: #25d366;
-    color: #fff;
-    padding: .88rem 2.3rem;
-    border-radius: 60px;
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: #25d366; color: #fff;
+    padding: .88rem 2.3rem; border-radius: 60px;
     text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: .84rem;
-    letter-spacing: 1.5px;
+    font-family: 'Cinzel', serif; font-weight: 700; font-size: .84rem; letter-spacing: 1.5px;
     box-shadow: 0 6px 20px rgba(37,211,102,.28);
     transition: all .3s;
 }
 .btn-whatsapp:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(37,211,102,.48); }
 
 /* ============================================================
-   CIERRE — Rapunzel dorada de FONDO real
+   CIERRE — Rapunzel dorada ocupa TODO el fondo del bloque
    ============================================================ */
 .closing-card {
     text-align: center;
-    /* overflow:hidden para que la imagen bg no se salga */
-    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Rapunzel dorada — fondo gigante, translúcida */
+/* Rapunzel dorada como fondo absolute que llena TODO el card */
 .rapunzel-bg {
     position: absolute;
-    bottom: -10px;
-    right: -20px;
-    width: 70%;
-    max-width: 400px;
-    opacity: .18;
+    inset: 0;               /* ocupa todo: top,right,bottom,left = 0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* escala sin deformarse, rellena todo */
+    object-position: center top;
+    opacity: .22;
     pointer-events: none;
     z-index: 0;
-    filter: saturate(1.4) blur(.5px);
-    /* NO mix-blend-mode aquí — queremos que se vea aunque sea tenue */
+    filter: saturate(1.5) brightness(1.1);
+    /* SIN mix-blend-mode para que se vea el color dorado */
 }
 
 .closing-content {
     position: relative;
     z-index: 2;
     width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .closing-title {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(3rem, 7vw, 5rem);
+    font-size: clamp(3rem,7vw,5rem);
     color: var(--lila-deep);
     text-shadow: 0 4px 28px rgba(100,50,180,.18);
     display: block;
     margin-bottom: 2rem;
 }
 .closing-rapunzel {
-    width: min(210px, 50%);
+    width: min(210px,50%);
     display: block;
     margin: 0 auto 1.5rem;
-    filter: drop-shadow(0 12px 38px rgba(100,50,180,.2));
     mix-blend-mode: multiply;
+    filter: drop-shadow(0 12px 38px rgba(100,50,180,.2));
     animation: floatS 9s ease-in-out infinite;
 }
 .closing-lanterns {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    margin-top: .5rem;
+    display: flex; justify-content: center; gap: 2.5rem; margin-top: .5rem;
 }
 .closing-lanterns img {
     width: 46px;
@@ -779,13 +696,9 @@ body {
    FOOTER
    ============================================================ */
 .footer {
-    text-align: center;
-    color: rgba(100,60,160,.32);
-    font-size: .78rem;
-    padding: .8rem 0;
-    font-family: 'Lora', serif;
-    position: relative;
-    z-index: 1;
+    text-align: center; color: rgba(100,60,160,.32);
+    font-size: .78rem; padding: .8rem 0;
+    font-family: 'Lora', serif; position: relative; z-index: 1;
 }
 
 /* ============================================================
@@ -793,16 +706,21 @@ body {
    ============================================================ */
 @media (max-width: 768px) {
     .invitation-wrapper { padding: 2rem .8rem 4rem; }
-    .section { margin-bottom: 3.2rem; }
+    .section { margin-bottom: 4rem; }
     .card-box { padding: 2rem 1.3rem; border-radius: 22px; }
+    .rama-wrap .rama-l, .rama-wrap .rama-r { width: 140px; }
+    .farol-card { width: 70px; top: -22px; left: 14px; }
+    .farol-glow { width: 100px; height: 100px; }
     .message-layout { grid-template-columns: 1fr; gap: 1.4rem; }
     .pascal-img { width: 100px; margin: 0 auto; order: -1; }
     .date-location { grid-template-columns: 1fr; gap: 1.1rem; }
     .countdown-grid { grid-template-columns: repeat(2,1fr); gap: .7rem; }
     .cd-item { padding: 1.1rem .2rem; }
-    .fl-tl,.fl-tr,.fl-bl,.fl-br { width: 110px; }
-    .rama-hojas-l,.rama-seca-r { width: 58px; }
     .moon { width: 75px; height: 75px; }
+    .card-flora .cf-tl, .card-flora .cf-br { width: 65%; }
+    .card-flora .cf-tr, .card-flora .cf-bl { width: 50%; }
+    .closing-card { min-height: 360px; }
+    .hero-crown { width: 85px; }
 }
 @media (max-width: 480px) {
     .card-box { padding: 1.5rem .9rem; border-radius: 18px; }
@@ -810,8 +728,9 @@ body {
     .date-day { font-size: 3.5rem; }
     .dresscode-grid { grid-template-columns: 1fr; max-width: 200px; }
     .btn-gold,.btn-whatsapp { width: 100%; justify-content: center; }
-    .fl-tl,.fl-tr { width: 85px; }
-    .fl-bl,.fl-br { display: none; }
-    .rama-hojas-l,.rama-seca-r { display: none; }
+    .rama-wrap .rama-l, .rama-wrap .rama-r { width: 100px; }
+    .farol-card { width: 58px; }
     .moon { width: 58px; height: 58px; }
+    .closing-card { min-height: 300px; }
+    .hero-crown { width: 70px; }
 }
