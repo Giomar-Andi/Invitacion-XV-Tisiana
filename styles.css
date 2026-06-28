@@ -779,3 +779,23 @@ body {
     .frame-flower-tl,.frame-flower-tr { width: 85px; }
     .moon { width: 55px; height: 55px; }
 }
+
+/* ============================================================
+   CIERRE — estilos adicionales
+   ============================================================ */
+.closing-lanterns {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 1.2rem;
+}
+.closing-lanterns img {
+    width: 52px;
+    filter: drop-shadow(0 4px 14px rgba(212,175,55,.45));
+}
+
+/* Asegura que el card del cierre tenga overflow hidden para el bg */
+.closing-section .card-box {
+    overflow: hidden;
+    position: relative;
+}
