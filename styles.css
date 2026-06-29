@@ -38,7 +38,6 @@ body {
     position: fixed;
     inset: 0;
     z-index: 0;
-    background: rgba(10, 5, 30, 0.45);
     pointer-events: none;
 }
 
