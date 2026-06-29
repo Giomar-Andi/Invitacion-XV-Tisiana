@@ -31,11 +31,9 @@ body {
     position: fixed;
     inset: 0;
     z-index: 0;
-    background:
-        url('fondo-rapunzel.webp') center center / cover no-repeat;
+    background: url('fondo-rapunzel.webp') center center / cover no-repeat;
     overflow: hidden;
 }
-/* Overlay oscuro sobre el fondo para premium y legibilidad */
 .bg-scene-overlay {
     position: fixed;
     inset: 0;
@@ -43,58 +41,11 @@ body {
     background: rgba(10, 5, 30, 0.45);
     pointer-events: none;
 }
-.bg-scene::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 80% 40% at 30% 70%, rgba(255,200,230,.3) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 30% at 75% 55%, rgba(220,170,255,.25) 0%, transparent 70%);
-}
-.bg-scene::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        radial-gradient(circle, rgba(212,175,55,.2) 1px, transparent 1px),
-        radial-gradient(circle, rgba(180,120,240,.15) 1px, transparent 1px);
-    background-size: 70px 70px, 110px 110px;
-    background-position: 5px 5px, 55px 30px;
-}
 
-.moon {
-    position: absolute;
-    top: 4%; right: 6%;
-    width: 105px; height: 105px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #fff8d0, #f8e060, #e8c830);
-    box-shadow:
-        0 0 0 10px rgba(255,240,100,.1),
-        0 0 60px rgba(255,220,60,.5),
-        0 0 140px rgba(255,200,40,.2);
-    animation: moonGlow 6s ease-in-out infinite alternate;
-}
-.moon::before {
-    content: '';
-    position: absolute;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: rgba(200,170,20,.15);
-    top: 22%; left: 30%;
-    box-shadow: 22px 18px 0 8px rgba(200,170,20,.1);
-}
-@keyframes moonGlow {
-    from { box-shadow: 0 0 0 8px rgba(255,240,100,.1), 0 0 55px rgba(255,220,60,.4), 0 0 110px rgba(255,200,40,.15); }
-    to   { box-shadow: 0 0 0 16px rgba(255,240,100,.18), 0 0 90px rgba(255,220,60,.7), 0 0 200px rgba(255,200,40,.3); }
-}
 
-.landscape {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 220px;
-    pointer-events: none;
-}
-.landscape svg { width: 100%; height: 100%; }
+
+
+
 
 #stars { position: absolute; inset: 0; pointer-events: none; }
 .star {
@@ -768,16 +719,15 @@ body {
    ============================================================ */
 .pascal-bg-img {
     position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-    width: 45%;
-    max-width: 220px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     opacity: .1;
     pointer-events: none;
     z-index: 1;
-    filter: saturate(1.4) brightness(1.1);
-    mix-blend-mode: screen;
+    filter: saturate(1.4) brightness(1.2);
 }
 
 /* flores.png de images/ como fondo que cubre toda la sección */
@@ -821,9 +771,3 @@ body {
 .card-box .hero-name        { color: #f0e8ff; }
 .card-box .section-eyebrow  { color: #ddc8ff; }
 .card-box .closing-title    { color: #e8d8ff; }
-
-/* Ajuste global: la luna y estrellas ahora sobre foto oscura */
-.moon {
-    mix-blend-mode: screen;
-    opacity: .85;
-}
