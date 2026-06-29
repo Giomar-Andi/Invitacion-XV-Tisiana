@@ -34,28 +34,7 @@ body {
     background: url('fondo-rapunzel.webp') center center / cover no-repeat;
     overflow: hidden;
 }
-.bg-scene-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-}
 
-
-
-
-
-
-#stars { position: absolute; inset: 0; pointer-events: none; }
-.star {
-    position: absolute;
-    border-radius: 50%;
-    animation: twinkle ease-in-out infinite alternate;
-}
-@keyframes twinkle {
-    from { opacity: .08; transform: scale(.5); }
-    to   { opacity: .75; transform: scale(1.4); }
-}
 
 /* ============================================================
    BOTÓN MÚSICA
